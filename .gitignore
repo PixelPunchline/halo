@@ -26,13 +26,7 @@ android/build/
 .gradle/
 local.properties
 
-# Large Desktop Release Binaries (GitHub 100MB limit)
-release/mac/
-release/windows/
-release/linux/
-*.dmg
-*.pkg
-*.exe
+# Unpacked intermediate build directories
 *.app/
 *.blockmap
 
