@@ -6,7 +6,7 @@
 [![Team](https://img.shields.io/badge/Team-The_H@ckers-00C49F.svg)](#team--contributors)
 [![School](https://img.shields.io/badge/School-The_Gaudium_School-blue.svg)](https://thegaudium.com)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-thehackers--halo.netlify.app-00C7B7?style=flat&logo=netlify)](https://thehackers-halo.netlify.app/)
-[![Platform](https://img.shields.io/badge/Platform-iOS_|_Android_|_macOS_|_Windows_|_Web-orange.svg)](#downloads--releases)
+[![Platform](https://img.shields.io/badge/Platform-iOS_|_Android_|_macOS_|_Windows_|_Linux_|_Web-orange.svg)](#downloads--releases)
 [![License](https://img.shields.io/badge/Privacy-100%25_On--Device_Local-brightgreen.svg)](#privacy--architecture)
 
 <p align="center">
@@ -118,6 +118,7 @@ Pre-compiled installation packages are available in the [`release/`](release/) f
 | 🍏 **iOS** | [`release/ios/Halo.ipa`](release/ios/Halo.ipa) | Native iOS app with WebKit audio session bypass |
 | 🤖 **Android** | [`release/android/Halo-1.0.0.apk`](release/android/Halo-1.0.0.apk) | Standalone APK for Android 8.0+ devices |
 | 🍎 **macOS** | [`release/mac/Halo-1.0.0-arm64.dmg`](release/mac/) | DMG Installer for Apple Silicon Macs |
+| 🐧 **Linux** | [`release/linux/Halo-1.0.0.AppImage`](https://github.com/PixelPunchline/halo/releases/download/v1.0.0/Halo-1.0.0.AppImage) | AppImage & DEB for Ubuntu / Debian / Fedora |
 | 🪟 **Windows** | [`release/windows/Halo Setup 1.0.0.exe`](release/windows/) | 64-bit Windows executable installer |
 
 ---
