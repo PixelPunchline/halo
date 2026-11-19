@@ -1,0 +1,279 @@
+2026-10-30 12:05:43 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7b860d8f00; archive(resolved)="<IDEArchive: 0x7b85ecd8f0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team(resolved)="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	Chain (14, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7b860d8f00; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionProcessingPipelineContext: 0x7b860d9200; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f5a580; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f59b80; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f59900; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f59680; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f59400; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f59180; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f58f00; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="<IDEProvisioningBasicTeam: 0x7b83a50d60; teamID='4PG674VNQ7', teamName='(null)'>">
+	<IDEDistributionContext: 0x7b85f58c80; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="(null)">
+	<IDEDistributionContext: 0x7b85f58a00; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="(null)">
+	<IDEDistributionContext: 0x7b85f58780; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="(null)">
+	<IDEDistributionContext: 0x7b85f58000; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x7b83a04070>", team="(null)">
+	<IDEDistributionContext: 0x104e1a070; archive = "<IDEArchive: 0x7b85ecd8f0>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7b860d8f00>
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2026-10-30 12:05:43 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app' '/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app'
+2026-10-30 12:05:43 +0000  >>> Copying /Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app 
+2026-10-30 12:05:43 +0000  copying file ./_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  cloned ./_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./App ... 
+2026-10-30 12:05:43 +0000  cloned ./App
+2026-10-30 12:05:43 +0000  copying file ./AppIcon60x60@2x.png ... 
+2026-10-30 12:05:43 +0000  cloned ./AppIcon60x60@2x.png
+2026-10-30 12:05:43 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+2026-10-30 12:05:43 +0000  cloned ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+2026-10-30 12:05:43 +0000  cloned ./Base.lproj/Main.storyboardc/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib ... 
+2026-10-30 12:05:43 +0000  cloned ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib
+2026-10-30 12:05:43 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2026-10-30 12:05:43 +0000  cloned ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2026-10-30 12:05:43 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2026-10-30 12:05:43 +0000  cloned ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./config.xml ... 
+2026-10-30 12:05:43 +0000  cloned ./config.xml
+2026-10-30 12:05:43 +0000  copying file ./public/index.html ... 
+2026-10-30 12:05:43 +0000  cloned ./public/index.html
+2026-10-30 12:05:43 +0000  copying file ./public/cordova.js ... 
+2026-10-30 12:05:43 +0000  cloned ./public/cordova.js
+2026-10-30 12:05:43 +0000  copying file ./public/cordova_plugins.js ... 
+2026-10-30 12:05:43 +0000  cloned ./public/cordova_plugins.js
+2026-10-30 12:05:43 +0000  copying file ./Assets.car ... 
+2026-10-30 12:05:43 +0000  cloned ./Assets.car
+2026-10-30 12:05:43 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2026-10-30 12:05:43 +0000  cloned ./AppIcon76x76@2x~ipad.png
+2026-10-30 12:05:43 +0000  copying file ./capacitor.config.json ... 
+2026-10-30 12:05:43 +0000  cloned ./capacitor.config.json
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Capacitor.framework/_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Capacitor.framework/_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Capacitor.framework/native-bridge.js ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Capacitor.framework/native-bridge.js
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Capacitor.framework/Capacitor ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Capacitor.framework/Capacitor
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Capacitor.framework/PrivacyInfo.xcprivacy ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Capacitor.framework/PrivacyInfo.xcprivacy
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Capacitor.framework/Info.plist ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Capacitor.framework/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Cordova.framework/_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Cordova.framework/_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Cordova.framework/Cordova ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Cordova.framework/Cordova
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Cordova.framework/PrivacyInfo.xcprivacy ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Cordova.framework/PrivacyInfo.xcprivacy
+2026-10-30 12:05:43 +0000  copying file ./Frameworks/Cordova.framework/Info.plist ... 
+2026-10-30 12:05:43 +0000  cloned ./Frameworks/Cordova.framework/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./embedded.mobileprovision ... 
+2026-10-30 12:05:43 +0000  cloned ./embedded.mobileprovision
+2026-10-30 12:05:43 +0000  copying file ./Info.plist ... 
+2026-10-30 12:05:43 +0000  cloned ./Info.plist
+2026-10-30 12:05:43 +0000  copying file ./PkgInfo ... 
+2026-10-30 12:05:43 +0000  cloned ./PkgInfo
+2026-10-30 12:05:43 +0000 [MT] /usr/bin/ditto exited with 0
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2026-10-30 12:05:43 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x7b839913e0; bundleID='org.cocoapods.Capacitor', path='<DVTFilePath:0x7b85fcc000:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b839914a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab6e60; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Capacitor', executablePath='<DVTFilePath:0x7b83990c00:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework/Capacitor'>', hardenedRuntime='0'>'>
+2026-10-30 12:05:43 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x7b84b6c840; bundleID='org.cocoapods.Cordova', path='<DVTFilePath:0x7b85fcc540:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab6f40; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Cordova', executablePath='<DVTFilePath:0x7b83990e40:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework/Cordova'>', hardenedRuntime='0'>'>
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2026-10-30 12:05:43 +0000 [MT] Archs to thin for item /Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework are []
+2026-10-30 12:05:43 +0000 [MT] Archs to thin for item /Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework are []
+2026-10-30 12:05:43 +0000 [MT] Archs to thin for item /Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app are []
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionODRStep
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2026-10-30 12:05:43 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2026-10-30 12:05:43 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2026-10-30 12:05:43 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b839913e0; bundleID='org.cocoapods.Capacitor', path='<DVTFilePath:0x7b85fcc000:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b839914a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7e20; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Capacitor', executablePath='<DVTFilePath:0x7b83990c00:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework/Capacitor'>', hardenedRuntime='0'>'>: {
+}
+2026-10-30 12:05:43 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b839913e0; bundleID='org.cocoapods.Capacitor', path='<DVTFilePath:0x7b85fcc000:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b839914a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7e20; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Capacitor', executablePath='<DVTFilePath:0x7b83990c00:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework/Capacitor'>', hardenedRuntime='0'>'> are: {
+}
+2026-10-30 12:05:43 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x7b839913e0; bundleID='org.cocoapods.Capacitor', path='<DVTFilePath:0x7b85fcc000:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b839914a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7e20; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Capacitor', executablePath='<DVTFilePath:0x7b83990c00:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Capacitor.framework/Capacitor'>', hardenedRuntime='0'>'> to: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~dCxuaS
+2026-10-30 12:05:43 +0000 [MT] invoking codesign: <NSConcreteTask: 0x7b8614b980; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    5A6A65A375B988205970EA2B42978BF1F61A4CF5,
+    "--entitlements",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~dCxuaS",
+    "--preserve-metadata=identifier,flags,runtime,launch-constraints,library-constraints",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Capacitor.framework"
+)'>
+2026-10-30 12:05:43 +0000 [MT] codesign output: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Capacitor.framework: replacing existing signature
+/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Capacitor.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.Capacitor]
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b84b6c840; bundleID='org.cocoapods.Cordova', path='<DVTFilePath:0x7b85fcc540:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7f00; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Cordova', executablePath='<DVTFilePath:0x7b83990e40:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework/Cordova'>', hardenedRuntime='0'>'>: {
+}
+2026-10-30 12:05:43 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b84b6c840; bundleID='org.cocoapods.Cordova', path='<DVTFilePath:0x7b85fcc540:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7f00; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Cordova', executablePath='<DVTFilePath:0x7b83990e40:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework/Cordova'>', hardenedRuntime='0'>'> are: {
+}
+2026-10-30 12:05:43 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x7b84b6c840; bundleID='org.cocoapods.Cordova', path='<DVTFilePath:0x7b85fcc540:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83ab7f00; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='(null)', teamID='4PG674VNQ7', identifier='org.cocoapods.Cordova', executablePath='<DVTFilePath:0x7b83990e40:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/Frameworks/Cordova.framework/Cordova'>', hardenedRuntime='0'>'> to: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~KYLcze
+2026-10-30 12:05:43 +0000 [MT] invoking codesign: <NSConcreteTask: 0x7b8614b890; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    5A6A65A375B988205970EA2B42978BF1F61A4CF5,
+    "--entitlements",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~KYLcze",
+    "--preserve-metadata=identifier,flags,runtime,launch-constraints,library-constraints",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Cordova.framework"
+)'>
+2026-10-30 12:05:43 +0000 [MT] codesign output: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Cordova.framework: replacing existing signature
+/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Cordova.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.Cordova]
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b83991440; bundleID='com.halo.wellbeing', path='<DVTFilePath:0x7b83f63420:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991380; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83960620; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='{
+    "application-identifier" = "4PG674VNQ7.com.halo.wellbeing";
+    "com.apple.developer.team-identifier" = 4PG674VNQ7;
+    "get-task-allow" = 1;
+}', teamID='4PG674VNQ7', identifier='com.halo.wellbeing', executablePath='<DVTFilePath:0x7b839905a0:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/App'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "4PG674VNQ7.com.halo.wellbeing";
+    "com.apple.developer.team-identifier" = 4PG674VNQ7;
+    "get-task-allow" = 1;
+}
+2026-10-30 12:05:43 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2026-10-30 12:05:43 +0000 [MT] Entitlements for <IDEDistributionItem: 0x7b83991440; bundleID='com.halo.wellbeing', path='<DVTFilePath:0x7b83f63420:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991380; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83960620; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='{
+    "application-identifier" = "4PG674VNQ7.com.halo.wellbeing";
+    "com.apple.developer.team-identifier" = 4PG674VNQ7;
+    "get-task-allow" = 1;
+}', teamID='4PG674VNQ7', identifier='com.halo.wellbeing', executablePath='<DVTFilePath:0x7b839905a0:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/App'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "4PG674VNQ7.com.halo.wellbeing";
+    "com.apple.developer.team-identifier" = 4PG674VNQ7;
+    "get-task-allow" = 1;
+}
+2026-10-30 12:05:43 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x7b83991440; bundleID='com.halo.wellbeing', path='<DVTFilePath:0x7b83f63420:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7b83991380; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7b83960620; name='Apple Development: mhruthvikaarav@icloud.com (2DGCZ933SG)', hash='5A6A65A375B988205970EA2B42978BF1F61A4CF5', serialNumber='65EAE5828F41845B206146F251AFEB24', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-01 17:08:31 +0000''>', entitlements='{
+    "application-identifier" = "4PG674VNQ7.com.halo.wellbeing";
+    "com.apple.developer.team-identifier" = 4PG674VNQ7;
+    "get-task-allow" = 1;
+}', teamID='4PG674VNQ7', identifier='com.halo.wellbeing', executablePath='<DVTFilePath:0x7b839905a0:'/Users/pixelpunchline/Documents/hackathon/release/ios/Halo.xcarchive/Products/Applications/App.app/App'>', hardenedRuntime='0'>'> to: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~OKrONZ
+2026-10-30 12:05:43 +0000 [MT] invoking codesign: <NSConcreteTask: 0x7b8614b890; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    5A6A65A375B988205970EA2B42978BF1F61A4CF5,
+    "--entitlements",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/entitlements~~~OKrONZ",
+    "--preserve-metadata=identifier,flags,runtime,launch-constraints,library-constraints",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app"
+)'>
+2026-10-30 12:05:43 +0000 [MT] codesign output: /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app: replacing existing signature
+/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app: signed app bundle with Mach-O thin (arm64) [com.halo.wellbeing]
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionCreateIPAStep
+2026-10-30 12:05:43 +0000 [MT] Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root' '/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Packages/App.ipa'
+2026-10-30 12:05:43 +0000  >>> Copying /var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root 
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  7883 bytes for ./Payload/App.app/_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/App ... 
+2026-10-30 12:05:43 +0000  93728 bytes for ./Payload/App.app/App
+copying file ./Payload/App.app/AppIcon60x60@2x.png ... 
+2026-10-30 12:05:43 +0000  4734 bytes for ./Payload/App.app/AppIcon60x60@2x.png
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+2026-10-30 12:05:43 +0000  858 bytes for ./Payload/App.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Base.lproj/Main.storyboardc/Info.plist ... 
+2026-10-30 12:05:43 +0000  258 bytes for ./Payload/App.app/Base.lproj/Main.storyboardc/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib ... 
+2026-10-30 12:05:43 +0000  1306 bytes for ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2026-10-30 12:05:43 +0000  924 bytes for ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2026-10-30 12:05:43 +0000  258 bytes for ./Payload/App.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/config.xml ... 
+2026-10-30 12:05:43 +0000  185 bytes for ./Payload/App.app/config.xml
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/public/index.html ... 
+2026-10-30 12:05:43 +0000  64916 bytes for ./Payload/App.app/public/index.html
+copying file ./Payload/App.app/public/cordova.js ... 
+2026-10-30 12:05:43 +0000  0 bytes for ./Payload/App.app/public/cordova.js
+copying file ./Payload/App.app/public/cordova_plugins.js ... 
+2026-10-30 12:05:43 +0000  0 bytes for ./Payload/App.app/public/cordova_plugins.js
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Assets.car ... 
+2026-10-30 12:05:43 +0000  295656 bytes for ./Payload/App.app/Assets.car
+copying file ./Payload/App.app/AppIcon76x76@2x~ipad.png ... 
+2026-10-30 12:05:43 +0000  6563 bytes for ./Payload/App.app/AppIcon76x76@2x~ipad.png
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/capacitor.config.json ... 
+2026-10-30 12:05:43 +0000  98 bytes for ./Payload/App.app/capacitor.config.json
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Frameworks/Capacitor.framework/_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  2252 bytes for ./Payload/App.app/Frameworks/Capacitor.framework/_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Frameworks/Capacitor.framework/native-bridge.js ... 
+2026-10-30 12:05:43 +0000  53102 bytes for ./Payload/App.app/Frameworks/Capacitor.framework/native-bridge.js
+copying file ./Payload/App.app/Frameworks/Capacitor.framework/Capacitor ... 
+2026-10-30 12:05:43 +0000  1485632 bytes for ./Payload/App.app/Frameworks/Capacitor.framework/Capacitor
+copying file ./Payload/App.app/Frameworks/Capacitor.framework/PrivacyInfo.xcprivacy ... 
+2026-10-30 12:05:43 +0000  373 bytes for ./Payload/App.app/Frameworks/Capacitor.framework/PrivacyInfo.xcprivacy
+copying file ./Payload/App.app/Frameworks/Capacitor.framework/Info.plist ... 
+2026-10-30 12:05:43 +0000  794 bytes for ./Payload/App.app/Frameworks/Capacitor.framework/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Frameworks/Cordova.framework/_CodeSignature/CodeResources ... 
+2026-10-30 12:05:43 +0000  2034 bytes for ./Payload/App.app/Frameworks/Cordova.framework/_CodeSignature/CodeResources
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Frameworks/Cordova.framework/Cordova ... 
+2026-10-30 12:05:43 +0000  148096 bytes for ./Payload/App.app/Frameworks/Cordova.framework/Cordova
+copying file ./Payload/App.app/Frameworks/Cordova.framework/PrivacyInfo.xcprivacy ... 
+2026-10-30 12:05:43 +0000  373 bytes for ./Payload/App.app/Frameworks/Cordova.framework/PrivacyInfo.xcprivacy
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Frameworks/Cordova.framework/Info.plist ... 
+2026-10-30 12:05:43 +0000  790 bytes for ./Payload/App.app/Frameworks/Cordova.framework/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/embedded.mobileprovision ... 
+2026-10-30 12:05:43 +0000  16366 bytes for ./Payload/App.app/embedded.mobileprovision
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/Info.plist ... 
+2026-10-30 12:05:43 +0000  1378 bytes for ./Payload/App.app/Info.plist
+2026-10-30 12:05:43 +0000  copying file ./Payload/App.app/PkgInfo ... 
+2026-10-30 12:05:43 +0000  8 bytes for ./Payload/App.app/PkgInfo
+2026-10-30 12:05:43 +0000 [MT] /usr/bin/ditto exited with 0
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2026-10-30 12:05:43 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2026-10-30 12:05:43 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x7b861f24c0:'/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Capacitor.framework'>
+2026-10-30 12:05:43 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x7b861f2370:'/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app/Frameworks/Cordova.framework'>
+2026-10-30 12:05:43 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x7b83992100:'/var/folders/fc/pgszjyqn42g_5tr90hvkp96w0000gn/T/XcodeDistPipeline.~~~jHSUMY/Root/Payload/App.app'>
+2026-10-30 12:05:43 +0000 [MT] Processing step: IDEDistributionCreateManifestStep

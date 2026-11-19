@@ -1,0 +1,144 @@
+{
+  "name": "halo-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "Halo",
+    "email": "support@halo.wellbeing"
+  },
+  "description": "Halo wellbeing app for desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:web": "node scripts/build-web.js",
+    "ios:sync": "npm run build:web && cap sync ios",
+    "ios:open": "open ios/App/App.xcworkspace",
+    "ios:ipa": "npm run ios:sync && xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination generic/platform=iOS -archivePath release/ios/Halo.xcarchive -allowProvisioningUpdates -allowProvisioningDeviceRegistration DEVELOPMENT_TEAM=4PG674VNQ7 CURRENT_PROJECT_VERSION=2 archive && xcodebuild -exportArchive -archivePath release/ios/Halo.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath release/ios -allowProvisioningUpdates",
+    "dist:mac": "electron-builder --mac pkg --arm64 --x64",
+    "dist:win": "electron-builder --win msi --x64",
+    "dist:mac:dmg": "electron-builder --mac dmg --arm64 --x64",
+    "dist:win:exe": "electron-builder --win nsis --x64",
+    "android:add": "cap add android",
+    "android:sync": "npm run build:web && cap sync android",
+    "android:open": "open -a \"Android Studio\" android",
+    "android:apk": "npm run android:sync && cd android && JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home ANDROID_HOME=/Users/pixelpunchline/Library/Android/sdk ./gradlew assembleDebug && cp app/build/outputs/apk/debug/app-debug.apk ../release/android/Halo-1.0.0.apk",
+    "dist:linux": "PATH=\"/opt/homebrew/bin:/usr/local/bin:/Users/pixelpunchline/.rokit/bin:/Users/pixelpunchline/.cargo/bin:/Applications/Xcode-beta.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin\" ./node_modules/.bin/electron-builder --linux AppImage deb tar.gz --x64 && mkdir -p release/linux && mv release/*.AppImage release/*.deb release/*.tar.gz release/linux/ 2>/dev/null || true"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
+    "@capacitor/ios": "^7.6.10",
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.halo.wellbeing",
+    "productName": "Halo",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "Halo.html",
+      "build/icon.icns",
+      "build/icon.ico",
+      "icon.png",
+      "main.js",
+      "package.json"
+    ],
+    "mac": {
+      "electronLanguages": [
+        "en-US"
+      ],
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "pkg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.healthcare-fitness"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "msi",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "msi": {},
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "maintainer": "Halo Support <support@halo.wellbeing>"
+    },
+    "icon": "build/icon.icns",
+    "dmg": {
+      "title": "Halo Installer",
+      "icon": "build/icon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 140,
+          "y": 240,
+          "type": "file"
+        },
+        {
+          "x": 380,
+          "y": 240,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 420
+      }
+    }
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10"
+  },
+  "homepage": "https://halo.wellbeing"
+}

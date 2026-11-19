@@ -1,0 +1,9 @@
+{
+  "appId": "com.halo.wellbeing",
+  "appName": "Halo",
+  "webDir": "www",
+  "backgroundColor": "#0b0912",
+  "ios": {
+    "allowsInlineMediaPlayback": true
+  }
+}
