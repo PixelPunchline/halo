@@ -119,6 +119,7 @@ Pre-compiled installation packages are available in the [`release/`](release/) f
 | 🤖 **Android** | [`release/android/Halo-1.0.0.apk`](release/android/Halo-1.0.0.apk) | Standalone APK for Android 8.0+ devices |
 | 🍎 **macOS** | [`release/mac/Halo-1.0.0-arm64.dmg`](release/mac/) | DMG Installer for Apple Silicon Macs |
 | 🐧 **Linux** | [`release/linux/Halo-1.0.0.AppImage`](https://github.com/PixelPunchline/halo/releases/download/v1.0.0/Halo-1.0.0.AppImage) | AppImage & DEB for Ubuntu / Debian / Fedora |
+| 🐧 **Linux** | [`release/linux/Halo-1.0.0.AppImage`](release/linux/) | Universal AppImage & DEB for Ubuntu / Debian / Fedora |
 | 🪟 **Windows** | [`release/windows/Halo Setup 1.0.0.exe`](release/windows/) | 64-bit Windows executable installer |
 
 ---
