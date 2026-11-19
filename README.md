@@ -104,7 +104,8 @@ hackathon/
     ├── ios/                # Halo.ipa (iOS Development Package)
     ├── android/            # Halo-1.0.0.apk (Android Package)
     ├── mac/                # Halo-1.0.0-arm64.dmg (macOS Installer)
-    └── windows/            # Halo Setup 1.0.0.exe (Windows Installer)
+    ├── windows/            # Halo Setup 1.0.0.exe (Windows Installer)
+    └── linux/              # Halo-1.0.0.AppImage & DEB package
 ```
 
 ---
