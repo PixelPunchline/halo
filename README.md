@@ -5,6 +5,7 @@
 [![Category](https://img.shields.io/badge/Category-JR2:_AI_That_Makes_Life_Better-8A2BE2.svg)](https://thegaudium.com)
 [![Team](https://img.shields.io/badge/Team-The_H@ckers-00C49F.svg)](#team--contributors)
 [![School](https://img.shields.io/badge/School-The_Gaudium_School-blue.svg)](https://thegaudium.com)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-thehackers--halo.netlify.app-00C7B7?style=flat&logo=netlify)](https://thehackers-halo.netlify.app/)
 [![Platform](https://img.shields.io/badge/Platform-iOS_|_Android_|_macOS_|_Windows_|_Web-orange.svg)](#downloads--releases)
 [![License](https://img.shields.io/badge/Privacy-100%25_On--Device_Local-brightgreen.svg)](#privacy--architecture)
 
@@ -12,7 +13,7 @@
   <b>A compassionate, multisensory emotional sanctuary designed to tackle adolescent burnout, academic anxiety, and neurodivergent sensory overload.</b>
 </p>
 
-[Quick Start](#-quick-start) • [Features](#-core-features) • [Architecture](#-project-architecture) • [Downloads](#-downloads--releases) • [The Team](#-team--contributors)
+[🌐 **Live Web App**](https://thehackers-halo.netlify.app/) • [Quick Start](#-quick-start) • [Features](#-core-features) • [Architecture](#-project-architecture) • [Downloads](#-downloads--releases) • [The Team](#-team--contributors)
 
 ---
 
