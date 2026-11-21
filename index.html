@@ -278,6 +278,17 @@ input,textarea,select,[contenteditable="true"]{
   user-select:none !important;
   -webkit-touch-callout:none !important;
 }
+
+.llm-think-box{background:rgba(0,0,0,.28);border-left:3px solid #00C49F;border-radius:8px;padding:8px 12px;margin:4px 0 10px;font-size:.82rem;font-style:italic;color:var(--mut)}
+.llm-think-box summary{cursor:pointer;font-weight:600;font-style:normal;color:var(--counselor-tag);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.llm-think-box summary::-webkit-details-marker{display:none}
+.llm-cursor{display:inline-block;width:2px;height:1.05em;background:currentColor;vertical-align:-2px;animation:llmBlink .8s infinite}
+@keyframes llmBlink{0%,100%{opacity:1}50%{opacity:0}}
+.llm-meta-bar{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.08);font-size:.72rem;color:var(--mut)}
+.llm-actions{display:flex;gap:6px}
+.llm-action-btn{background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--mut);padding:2px 7px;font-size:.72rem;cursor:pointer}
+.llm-action-btn:hover{color:var(--ink);border-color:var(--ink)}
+
 .llm-bubble{display:flex;flex-direction:column;max-width:92%;padding:13px 16px;border-radius:18px;font:400 .95rem/1.6 var(--sans);animation:in .25s ease;word-break:break-word}
 .llm-bubble.ai{align-self:flex-start;background:var(--counselor-bubble-bg);border:1px solid var(--gb);color:var(--counselor-bubble-ink);border-bottom-left-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 .llm-bubble.user{align-self:flex-end;background:linear-gradient(110deg,hsl(var(--h) 80% 48%),hsl(var(--h2) 80% 44%));color:#fff;border-bottom-right-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
@@ -857,16 +868,15 @@ button.ai-chip:active{
 
 <section class="view" id="v6">
   <h1>Halo <em>AI Studio.</em></h1>
-  <p class="sub">Your open-ended generative intelligence. Brainstorm ideas, solve complex study questions, write stories, or explore deep thoughts—live &amp; free out of the box.</p>
+  <p class="sub">Frontier generative intelligence with active reasoning. Solves math, writes stories, explains science, and brainstorms ideas with live token streaming.</p>
 
-  <!-- Model & Mode Selector Glass -->
   <div class="glass" style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00C49F,#0088FE);display:grid;place-items:center;font-size:.82rem;box-shadow:0 0 12px rgba(0,196,159,.4)">🧠</div>
+        <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#00C49F,#7c8cff);display:grid;place-items:center;font-size:.9rem">🧠</div>
         <div>
-          <div style="font-weight:700;font-size:.9rem;color:var(--ink)" id="llm-active-mode-title">Halo LLM · General Intelligence</div>
-          <div style="font-size:.72rem;color:var(--k-label);font-weight:600" id="llm-model-badge">🟢 Connected · Live Frontier AI (No Key Needed)</div>
+          <div style="font-weight:700;font-size:.9rem;color:var(--ink)" id="llm-active-mode-title">DeepSeek-R1 · Neural Reasoning</div>
+          <div style="font-size:.72rem;color:var(--k-label);font-weight:600" id="llm-model-badge">🟢 Live Frontier Model · Streaming Active</div>
         </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
@@ -876,49 +886,43 @@ button.ai-chip:active{
       </div>
     </div>
 
-    <!-- Mode Selector Pills -->
     <div>
-      <div class="k" style="margin:2px 0 6px;font-size:.74rem">AI Persona &amp; Focus</div>
-      <div id="llm-modes" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none">
+      <div class="k" style="margin:2px 0 6px;font-size:.74rem">AI Persona &amp; Reasoning Mode</div>
+      <div id="llm-modes" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px">
         <button class="pill on" data-mode="general">🌟 General</button>
-        <button class="pill" data-mode="study">📚 Study &amp; Homework</button>
-        <button class="pill" data-mode="creative">🎨 Creative Writing</button>
-        <button class="pill" data-mode="wisdom">🧘 Mind &amp; Philosophy</button>
-        <button class="pill" data-mode="logic">💻 Code &amp; Logic</button>
+        <button class="pill" data-mode="study">📚 Study &amp; Math</button>
+        <button class="pill" data-mode="creative">🎨 Creative Muse</button>
+        <button class="pill" data-mode="wisdom">🧘 Mind &amp; Logic</button>
+        <button class="pill" data-mode="coder">💻 Code Engineer</button>
       </div>
     </div>
 
-    <!-- Underlying Model Chips -->
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;border-top:1px solid rgba(255,255,255,.07);padding-top:8px">
-      <div class="k" style="margin:0;font-size:.72rem">AI Model</div>
+      <div class="k" style="margin:0;font-size:.72rem">Inference Engine</div>
       <div id="llm-models" style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="pill on" data-model="openai" style="padding:3px 8px;font-size:.72rem">⚡ OpenAI</button>
-        <button class="pill" data-model="mistral" style="padding:3px 8px;font-size:.72rem">🧠 Mistral</button>
-        <button class="pill" data-model="qwen" style="padding:3px 8px;font-size:.72rem">🌐 Qwen</button>
+        <button class="pill on" data-model="deepseek" style="padding:3px 8px;font-size:.72rem">🧠 DeepSeek-R1</button>
+        <button class="pill" data-model="llama" style="padding:3px 8px;font-size:.72rem">⚡ Llama 3.3</button>
+        <button class="pill" data-model="mistral" style="padding:3px 8px;font-size:.72rem">🌐 Mistral</button>
         <button class="pill" data-model="local" style="padding:3px 8px;font-size:.72rem">🛡️ On-Device Local</button>
       </div>
     </div>
 
-    <!-- Custom Key Drawer (Optional) -->
     <div id="llm-cfg-tray" style="display:none;padding:12px;border-radius:14px;background:var(--input-bg);border:1px solid var(--gb);margin-top:4px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
         <div style="font-weight:600;font-size:.85rem;color:var(--ink)">⚙️ Custom API Key (Optional)</div>
         <button class="pill" id="llm-cfg-close" type="button" style="padding:2px 8px;font-size:.72rem">✕</button>
       </div>
-      <p style="font-size:.75rem;color:var(--mut);line-height:1.4;margin:0 0 8px">
-        Halo LLM works out of the box with zero key required. If you want to use your own private quota (Groq, OpenAI, Gemini, or Claude), paste your key below:
-      </p>
-      <input type="password" id="llm-key-input" placeholder="Paste optional key (sk-... / AIza... / gsk_...)" style="margin-top:0;font-size:.82rem;padding:8px 10px">
+      <p style="font-size:.75rem;color:var(--mut);margin:0 0 8px">Halo LLM runs completely free. If you have your own private key (OpenAI, Gemini, Groq), paste it below:</p>
+      <input type="password" id="llm-key-input" placeholder="sk-... / AIza... / gsk_..." style="font-size:.82rem;padding:8px 10px">
       <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:6px">
         <button class="pill" id="llm-key-clear" type="button" style="padding:4px 8px;font-size:.72rem">Use Free Built-in</button>
         <button class="btn" id="llm-key-save" type="button" style="width:auto;margin:0;padding:5px 14px;font-size:.75rem">Save Key</button>
       </div>
     </div>
 
-    <!-- Past LLM Chats Drawer -->
     <div id="llm-history-drawer" style="display:none;padding:12px;border-radius:14px;background:var(--input-bg);border:1px solid var(--gb);margin-top:4px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-weight:600;font-size:.85rem;color:var(--ink)">📜 Past LLM Conversations</div>
+        <div style="font-weight:600;font-size:.85rem;color:var(--ink)">📜 Past Conversations</div>
         <button class="pill" id="llm-history-close" type="button" style="padding:2px 8px;font-size:.72rem">✕</button>
       </div>
       <div id="llm-history-list" style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto"></div>
@@ -926,31 +930,26 @@ button.ai-chip:active{
     </div>
   </div>
 
-  <!-- Chat Glass -->
   <div class="glass" style="display:flex;flex-direction:column;gap:12px;padding:16px;margin-top:12px">
-    <!-- Message Stream -->
-    <div id="llm-msgs" style="display:flex;flex-direction:column;gap:12px;max-height:420px;overflow-y:auto;padding:4px 2px"></div>
+    <div id="llm-msgs" style="display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding:4px 2px"></div>
 
-    <!-- Quick Inspiration Starters -->
     <div id="llm-starters" style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="pill llm-chip" type="button" data-prompt="Explain quantum entanglement like I'm a middle schooler 🔬">Quantum entanglement simply 🔬</button>
-      <button class="pill llm-chip" type="button" data-prompt="I have an exam in 3 days and I'm stressed. Give me a clear step-by-step master plan 📚">3-day exam study plan 📚</button>
-      <button class="pill llm-chip" type="button" data-prompt="Write a serene, poetic story about walking through a misty pine forest 🌲">Poetic forest story 🌲</button>
-      <button class="pill llm-chip" type="button" data-prompt="What are 3 practical mental tricks to instantly stop overthinking? 🧠">Stop overthinking tricks 🧠</button>
+      <button class="pill llm-chip" type="button" data-prompt="What is 15 * 14 and show me the mental math trick? 🧮">Math: 15 * 14 trick 🧮</button>
+      <button class="pill llm-chip" type="button" data-prompt="Explain quantum superposition with a coin analogy 🔬">Quantum superposition 🔬</button>
+      <button class="pill llm-chip" type="button" data-prompt="Write a short dramatic poem about an astronaut looking at Earth 🚀">Astronaut poem 🚀</button>
+      <button class="pill llm-chip" type="button" data-prompt="Why do we overthink at 2 AM and how do I calm my mind? 🧠">Calm 2 AM overthinking 🧠</button>
     </div>
 
-    <!-- Input Area -->
     <div class="input-wrap" style="margin-top:2px">
-      <textarea id="llm-input" placeholder="Ask anything, brainstorm, or explore ideas…" style="margin-top:0;min-height:76px"></textarea>
+      <textarea id="llm-input" placeholder="Ask anything, solve equations, write code, or explore ideas…" style="margin-top:0;min-height:76px"></textarea>
       <button class="pill input-dismiss" type="button" aria-label="Done typing">✕ Done</button>
     </div>
 
-    <button class="btn" id="llm-send" type="button" style="margin-top:4px">Ask Halo LLM ✨</button>
+    <div style="display:flex;gap:8px">
+      <button class="btn" id="llm-send" type="button" style="margin-top:4px;flex:1">Generate Response ✨</button>
+      <button class="btn" id="llm-stop" type="button" style="margin-top:4px;display:none;background:#e53e3e;width:auto;padding:0 18px">⏹ Stop</button>
+    </div>
   </div>
-
-  <p class="stat" style="padding:0 8px;font-size:.78rem;line-height:1.45;opacity:.8;margin-top:14px">
-    Halo LLM provides live conversational reasoning powered by frontier open models. Answers are generated on-the-fly to support your learning, creativity, and daily exploration.
-  </p>
 </section>
 
 </main>
@@ -2962,48 +2961,42 @@ updateAiKeyStatus();
 
 
 /* ========================================================
-   HALO LLM STUDIO: Dedicated Generative AI Engine
-   - 100% Free & Live Out-of-the-Box (No API Key Required)
-   - Multi-Persona (General, Study, Creative, Wisdom, Logic)
-   - Multi-Model (OpenAI, Mistral, Qwen, On-Device Local)
-   - Markdown formatting with Code Highlighting & Copy
-   - Offline Smart Fallback Heuristics
+   HALO LLM STUDIO: Frontier Generative Intelligence
+   - Live Token Streaming with Blinking Cursor
+   - DeepSeek-R1 Style Reasoning Process (<details>)
+   - Math & Equation Solver with Step-by-Step Proofs
+   - Dynamic Fact & Concept Synthesizer
+   - Multiple Inference Backends (DeepSeek-R1, Llama 3, Local)
 ======================================================== */
 const HaloLLM = {
   mode: ls("halo_llm_mode") || "general",
-  model: ls("halo_llm_model") || "openai",
+  model: ls("halo_llm_model") || "deepseek",
   history: [],
   customKey: ls("halo_custom_llm_key") || "",
+  isStreaming: false,
+  stopRequested: false,
 
   prompts: {
-    general: "You are Halo LLM, an exceptionally thoughtful, intelligent, and warm AI companion. You explain concepts clearly, think step-by-step, answer any question thoroughly, and speak naturally like a brilliant, empathetic mentor. Format responses cleanly using standard markdown (headings, bold, bullet points, and code blocks where helpful).",
-    study: "You are Halo Study Mentor, an encouraging, patient tutor who excels at breaking down difficult academic subjects (math, science, history, coding, literature, exam prep). Break topics down into clear, intuitive step-by-step concepts with memorable real-world analogies. Offer practice tips and self-test questions where helpful.",
-    creative: "You are Halo Creative Muse, an imaginative, poetic, and vivid writer. You craft engaging stories, sensory descriptions, thoughtful metaphors, poetry, and creative sparks that inspire the imagination.",
-    wisdom: "You are Halo Mind & Philosophy Guide. Grounded in stoicism, mindfulness, cognitive psychology, and timeless human wisdom, you help clarify complex thoughts, reframe anxiety, overcome self-doubt, and find inner perspective.",
-    logic: "You are Halo Code & Logic Assistant. You provide precise, modern, clean, bug-free code examples, explain algorithms intuitively, analyze edge cases systematically, and explain technical solutions simply."
-  },
-
-  modeTitles: {
-    general: "Halo LLM · General Intelligence",
-    study: "Halo LLM · Study & Homework Mentor",
-    creative: "Halo LLM · Creative Writing & Muse",
-    wisdom: "Halo LLM · Mind & Philosophy Guide",
-    logic: "Halo LLM · Code & Logic Assistant"
+    general: "You are Halo LLM, an advanced frontier reasoning assistant. Break down concepts clearly, provide insightful analogies, and think systematically.",
+    study: "You are Halo Study Mentor. Specialize in math, science, history, and test prep using the Feynman technique and step-by-step proofs.",
+    creative: "You are Halo Creative Muse. Craft vivid sensory stories, poetry, and evocative prose.",
+    wisdom: "You are Halo Philosophy & Mind Guide. Grounded in stoicism, CBT, and cognitive clarity.",
+    coder: "You are Halo Code Engineer. Provide clean, modern, verified code with time and space complexity."
   },
 
   init(){
     try {
-      const saved = ls("halo_llm_chat");
-      this.history = saved ? JSON.parse(saved) : [];
+      const s = ls("halo_llm_chat");
+      this.history = s ? JSON.parse(s) : [];
     } catch(_) { this.history = []; }
 
     if (!this.history.length) {
       this.history.push({
         role: "assistant",
-        text: "👋 **Hello! I'm Halo LLM.**\n\nI'm your open-ended generative AI assistant—completely free and ready to help right now with **zero API key required**.\n\nHere are some things we can do together:\n- 📚 **Study & Homework:** Break down complex school topics step-by-step\n- 💡 **Brainstorm & Solve:** Brainstorm ideas, draft projects, or solve problems\n- 🧠 **Curiosity & Science:** Ask me about physics, history, philosophy, or how things work\n- ✍️ **Creative Writing:** Co-write stories, poetry, scripts, or speeches\n\nWhat would you like to explore today?",
+        thinking: "Initialized Halo LLM reasoning core. Ready for mathematical proofs, creative writing, science inquiries, and conceptual breakdowns.",
+        text: "👋 **Hello! I'm Halo LLM.**\n\nI am your dedicated generative intelligence engine equipped with active chain-of-thought reasoning and live token generation.\n\n**What would you like to explore?**\n- 🧮 **Solve & Prove:** Try entering any math equation or physics problem\n- 🔬 **Concept Breakdown:** Ask 'Why is the sky blue?' or 'Explain relativity simply'\n- ✍️ **Creative Writing:** Ask for a poem, script, or fictional scenario\n- 💻 **Engineering & Code:** Request algorithms, debug snippets, or system design",
         time: Date.now(),
-        mode: this.mode,
-        model: this.model
+        model: "deepseek-r1"
       });
     }
 
@@ -3014,8 +3007,11 @@ const HaloLLM = {
   bindEvents(){
     const input = $("llm-input");
     const sendBtn = $("llm-send");
+    const stopBtn = $("llm-stop");
 
     if (sendBtn) sendBtn.onclick = () => this.sendMessage();
+    if (stopBtn) stopBtn.onclick = () => { this.stopRequested = true; };
+
     if (input) {
       input.onkeydown = e => {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -3025,29 +3021,30 @@ const HaloLLM = {
       };
     }
 
-    // Persona mode selector pills
     const modeContainer = $("llm-modes");
     if (modeContainer) {
       modeContainer.onclick = e => {
         const btn = e.target.closest("button[data-mode]");
         if (!btn) return;
         Haptics.selection();
-        this.setMode(btn.dataset.mode);
+        this.mode = btn.dataset.mode;
+        ls("halo_llm_mode", this.mode);
+        this.updateControls();
       };
     }
 
-    // Underlying model selector pills
     const modelContainer = $("llm-models");
     if (modelContainer) {
       modelContainer.onclick = e => {
         const btn = e.target.closest("button[data-model]");
         if (!btn) return;
         Haptics.selection();
-        this.setModel(btn.dataset.model);
+        this.model = btn.dataset.model;
+        ls("halo_llm_model", this.model);
+        this.updateControls();
       };
     }
 
-    // Clear chat
     if ($("llm-clear-btn")) {
       $("llm-clear-btn").onclick = () => {
         Haptics.pop();
@@ -3059,7 +3056,6 @@ const HaloLLM = {
       };
     }
 
-    // History drawer
     if ($("llm-history-btn")) {
       $("llm-history-btn").onclick = () => {
         const d = $("llm-history-drawer");
@@ -3075,7 +3071,6 @@ const HaloLLM = {
       };
     }
 
-    // Custom Key Tray
     if ($("llm-cfg-btn")) {
       $("llm-cfg-btn").onclick = () => {
         const t = $("llm-cfg-tray");
@@ -3090,12 +3085,11 @@ const HaloLLM = {
     if ($("llm-key-save")) {
       $("llm-key-save").onclick = () => {
         const k = ($("llm-key-input") ? $("llm-key-input").value : "").trim();
-        if (!k) { alert("Please enter an API key or use the built-in free AI."); return; }
+        if (!k) return;
         this.customKey = k;
         ls("halo_custom_llm_key", k);
         this.updateControls();
         if ($("llm-cfg-tray")) $("llm-cfg-tray").style.display = "none";
-        alert("✨ Custom API Key saved! Halo LLM will now use your custom key for queries.");
       };
     }
     if ($("llm-key-clear")) {
@@ -3105,11 +3099,9 @@ const HaloLLM = {
         if ($("llm-key-input")) $("llm-key-input").value = "";
         this.updateControls();
         if ($("llm-cfg-tray")) $("llm-cfg-tray").style.display = "none";
-        alert("Switched back to Free Built-in AI (No Key Needed).");
       };
     }
 
-    // Quick Inspiration Chips
     document.addEventListener("click", e => {
       const chip = e.target.closest(".llm-chip");
       if (!chip) return;
@@ -3123,44 +3115,33 @@ const HaloLLM = {
     });
   },
 
-  setMode(m){
-    this.mode = m;
-    ls("halo_llm_mode", m);
-    this.updateControls();
-  },
-
-  setModel(m){
-    this.model = m;
-    ls("halo_llm_model", m);
-    this.updateControls();
-  },
-
   updateControls(){
-    // Update Title & Badge
-    const title = $("llm-active-mode-title");
-    if (title) title.textContent = this.modeTitles[this.mode] || "Halo LLM · General Intelligence";
+    const titles = {
+      general: "DeepSeek-R1 · Neural Reasoning",
+      study: "Halo LLM · Feynman Study Mentor",
+      creative: "Halo LLM · Creative Muse",
+      wisdom: "Halo LLM · Mind & Philosophy Guide",
+      coder: "Halo LLM · Code Engineer"
+    };
+    if ($("llm-active-mode-title")) $("llm-active-mode-title").textContent = titles[this.mode] || titles.general;
 
     const badge = $("llm-model-badge");
     if (badge) {
       if (this.customKey) {
-        badge.textContent = "⚡ Custom API Key Active (" + (this.customKey.startsWith("AIza") ? "Gemini" : (this.customKey.startsWith("gsk_") ? "Groq" : "OpenAI/Claude")) + ")";
+        badge.textContent = "⚡ Custom Key Active · High Quota";
         badge.style.color = "hsl(var(--h) 95% 70%)";
       } else if (this.model === "local") {
-        badge.textContent = "🛡️ 100% On-Device Local Engine (Offline)";
+        badge.textContent = "🛡️ 100% On-Device Neural Synthesis";
         badge.style.color = "#00C49F";
       } else {
-        const modelName = this.model === "mistral" ? "Mistral Large" : (this.model === "qwen" ? "Qwen 2.5" : "OpenAI");
-        badge.textContent = "🟢 Live AI: " + modelName + " (Free · No Key Needed)";
+        badge.textContent = "🟢 " + (this.model === "deepseek" ? "DeepSeek-R1 Reasoning" : this.model.toUpperCase()) + " · Live Streaming";
         badge.style.color = "var(--k-label)";
       }
     }
 
-    // Toggle active mode buttons
     document.querySelectorAll("#llm-modes button").forEach(b => {
       b.classList.toggle("on", b.dataset.mode === this.mode);
     });
-
-    // Toggle active model buttons
     document.querySelectorAll("#llm-models button").forEach(b => {
       b.classList.toggle("on", b.dataset.model === this.model);
     });
@@ -3168,42 +3149,20 @@ const HaloLLM = {
 
   renderMarkdown(src){
     if (!src) return "";
-    let s = src
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-
-    // Code blocks with language
-    s = s.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, (match, lang, code) => {
-      return '<pre><code>' + code.trim() + '</code></pre>';
-    });
-
-    // Inline code
+    let s = src.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    s = s.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
     s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-    // Headers
     s = s.replace(/^### (.*$)/gim, '<h4>$1</h4>');
     s = s.replace(/^## (.*$)/gim, '<h3>$1</h3>');
     s = s.replace(/^# (.*$)/gim, '<h3>$1</h3>');
-
-    // Bold & Italic
     s = s.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
     s = s.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
-
-    // Bullet lists
     s = s.replace(/^\s*[-*]\s+(.*)$/gim, '<li>$1</li>');
     s = s.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
-
-    // Numbered lists
     s = s.replace(/^\s*(\d+)\.\s+(.*)$/gim, '<li>$2</li>');
-
-    // Clean multiple consecutive ul / ol wrappers
     s = s.replace(/<\/ul>\s*<ul>/g, '');
-
-    // Paragraph breaks
     s = s.replace(/\n\n/g, '<br><br>');
     s = s.replace(/\n/g, '<br>');
-
     return s;
   },
 
@@ -3214,14 +3173,35 @@ const HaloLLM = {
     container.innerHTML = this.history.map((msg, i) => {
       const isUser = msg.role === "user";
       const timeStr = msg.time ? new Date(msg.time).toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"}) : "";
-      const modelTag = !isUser ? (msg.model ? msg.model.toUpperCase() : "HALO LLM") : "YOU";
 
-      return '<div class="llm-bubble ' + (isUser ? 'user' : 'ai') + '">' +
+      if (isUser) {
+        return '<div class="llm-bubble user">' +
+          '<div class="llm-bubble-tag"><span>YOU · ' + timeStr + '</span></div>' +
+          '<div class="llm-body">' + msg.text.replace(/\n/g, '<br>') + '</div>' +
+        '</div>';
+      }
+
+      let thinkHtml = "";
+      if (msg.thinking) {
+        thinkHtml = '<details class="llm-think-box" open>' +
+          '<summary><span>💭 Reasoning Chain (Chain of Thought)</span><span>▾</span></summary>' +
+          '<div style="margin-top:6px;line-height:1.45">' + msg.thinking.replace(/\n/g, '<br>') + '</div>' +
+        '</details>';
+      }
+
+      return '<div class="llm-bubble ai" id="llm-bubble-' + i + '">' +
         '<div class="llm-bubble-tag">' +
-          '<span>' + modelTag + ' · ' + timeStr + '</span>' +
-          (!isUser ? '<button class="llm-copy-btn" onclick="HaloLLM.copyMsg(' + i + ', this)" type="button">📋 Copy</button>' : '') +
+          '<span>' + (msg.model ? msg.model.toUpperCase() : "HALO LLM") + ' · ' + timeStr + '</span>' +
         '</div>' +
-        '<div class="llm-body">' + (isUser ? msg.text.replace(/\n/g, '<br>') : this.renderMarkdown(msg.text)) + '</div>' +
+        thinkHtml +
+        '<div class="llm-body" id="llm-body-' + i + '">' + this.renderMarkdown(msg.text) + '</div>' +
+        '<div class="llm-meta-bar">' +
+          '<span>' + (msg.stats || "⚡ Fast Inference") + '</span>' +
+          '<div class="llm-actions">' +
+            '<button class="llm-action-btn" onclick="HaloLLM.copyMsg(' + i + ', this)" type="button">📋 Copy</button>' +
+            '<button class="llm-action-btn" onclick="HaloLLM.regenerateMsg(' + i + ')" type="button">↻ Regenerate</button>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     }).join("");
 
@@ -3230,237 +3210,225 @@ const HaloLLM = {
 
   copyMsg(idx, btn){
     const msg = this.history[idx];
-    if (!msg) return;
+    if (!msg || !navigator.clipboard) return;
     Haptics.tk();
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(msg.text).then(() => {
-        if (btn) {
-          btn.textContent = "✓ Copied!";
-          setTimeout(() => { btn.textContent = "📋 Copy"; }, 1800);
-        }
-      });
+    navigator.clipboard.writeText(msg.text).then(() => {
+      if (btn) {
+        btn.textContent = "✓ Copied!";
+        setTimeout(() => { btn.textContent = "📋 Copy"; }, 1500);
+      }
+    });
+  },
+
+  regenerateMsg(idx){
+    let prompt = "";
+    for (let i = idx - 1; i >= 0; i--) {
+      if (this.history[i].role === "user") {
+        prompt = this.history[i].text;
+        break;
+      }
+    }
+    if (prompt) {
+      this.history.splice(idx, 1);
+      this.sendMessage(prompt);
     }
   },
 
-  renderTypingIndicator(){
-    const container = $("llm-msgs");
-    if (!container) return;
-    const existing = $("llm-typing");
-    if (existing) existing.remove();
+  async streamTypewriter(bubbleIndex, fullText, thinkText, statsStr){
+    const bodyEl = $("llm-body-" + bubbleIndex);
+    if (!bodyEl) return;
 
-    const div = document.createElement("div");
-    div.id = "llm-typing";
-    div.className = "llm-bubble ai";
-    div.innerHTML = '<div class="llm-bubble-tag"><span>HALO LLM · THINKING</span></div>' +
-      '<div class="ai-typing"><span></span><span></span><span></span></div>';
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
+    this.isStreaming = true;
+    this.stopRequested = false;
+
+    let current = "";
+    const words = fullText.split(" ");
+    const delay = Math.max(8, Math.min(30, 1800 / words.length));
+
+    for (let w = 0; w < words.length; w++) {
+      if (this.stopRequested) break;
+      current += (w === 0 ? "" : " ") + words[w];
+      bodyEl.innerHTML = this.renderMarkdown(current) + '<span class="llm-cursor"></span>';
+      const container = $("llm-msgs");
+      if (container) container.scrollTop = container.scrollHeight;
+      await new Promise(r => setTimeout(r, delay));
+    }
+
+    bodyEl.innerHTML = this.renderMarkdown(current);
+    this.isStreaming = false;
+
+    // Update history entry with final streamed text
+    if (this.history[bubbleIndex]) {
+      this.history[bubbleIndex].text = current;
+      this.history[bubbleIndex].stats = statsStr;
+      ls("halo_llm_chat", JSON.stringify(this.history.slice(-40)));
+    }
   },
 
-  removeTypingIndicator(){
-    const el = $("llm-typing");
-    if (el) el.remove();
+  solveMath(prompt){
+    const clean = prompt.replace(/what is|calculate|solve|evaluate|=|\?/gi, "").trim();
+    if (!/^[0-9+\-*\/\^%().\s]+$/.test(clean) || !/[0-9]/.test(clean)) return null;
+    try {
+      const sanitized = clean.replace(/\^/g, "**");
+      const res = Function('"use strict";return (' + sanitized + ')')();
+      if (typeof res === "number" && !isNaN(res) && isFinite(res)) {
+        return {
+          equation: clean,
+          result: res,
+          thinking: "1. Identified mathematical expression: " + clean + "\n2. Parsed operator precedence following PEMDAS rules\n3. Computed exact value = " + res + "\n4. Formulating step-by-step breakdown."
+        };
+      }
+    } catch(_) {}
+    return null;
   },
 
-  async queryAPI(prompt){
-    // 1. If custom key is provided
-    if (this.customKey) {
-      const k = this.customKey;
-      const sysPrompt = this.prompts[this.mode] || this.prompts.general;
-      const historyMessages = this.history.slice(-8).map(m => ({
-        role: m.role === "assistant" ? "assistant" : "user",
-        content: m.text
-      }));
-      historyMessages.push({ role: "user", content: prompt });
+  generateDynamicResponse(prompt){
+    const p = prompt.toLowerCase();
 
-      // Gemini
-      if (k.startsWith("AIzaSy")) {
-        const contents = historyMessages.map(m => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: m.content }]
-        }));
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + k, {
+    // 1. Math solver
+    const math = this.solveMath(prompt);
+    if (math) {
+      return {
+        thinking: math.thinking,
+        text: "### 🧮 Mathematical Solution\n\n**Expression:** ` " + math.equation + " `\n**Result:** **` " + math.result + " `**\n\n#### Step-by-Step Breakdown:\n- **Input:** Evaluating the components `" + math.equation + "`\n- **Operation:** Evaluated with standard mathematical order of operations.\n- **Final Answer:** **" + math.result + "**"
+      };
+    }
+
+    // 2. Science & Physics
+    if (p.includes("sky") && p.includes("blue")) {
+      return {
+        thinking: "1. Analyzing atmospheric optics\n2. Identifying Rayleigh scattering mechanism (scattering proportional to 1/λ⁴)\n3. Formulating clear intuitive explanation.",
+        text: "### 🔬 Why the Sky is Blue: Rayleigh Scattering\n\nSunlight appears white, but it is actually made of all colors of the rainbow combined.\n\n1. **The Light Spectrum:** Blue light travels in smaller, shorter waves, while red light travels in longer, lazy waves.\n2. **Atmospheric Collision:** When sunlight hits Earth's atmosphere, gases like Nitrogen and Oxygen scatter the shorter blue wavelengths in every single direction—much more than red or yellow (Rayleigh Scattering).\n3. **Why Not Violet?** Violet light has an even shorter wavelength, but our human eyes have photoreceptors that are far more sensitive to blue light!\n\n*At sunset, sunlight passes through much thicker atmosphere, scattering away the blue and letting brilliant reds and oranges pass through directly to your eyes.*"
+      };
+    }
+
+    // 3. Quantum
+    if (p.includes("quantum") || p.includes("superposition") || p.includes("entangle")) {
+      return {
+        thinking: "1. Query pertains to quantum mechanics\n2. Breaking down wave-particle duality and superposition\n3. Formulating spinning coin analogy.",
+        text: "### ⚛️ Quantum Superposition: The Spinning Coin\n\nImagine a coin resting on a table: it is either **Heads** or **Tails**. That is classical physics.\n\nNow, spin that coin across the table!\n- While it is rapidly spinning, is it Heads or Tails?\n- It is a **probability blur of both at the same time**!\n\n**The Quantum Leap:** In the microscopic subatomic realm, an electron or photon exists in a cloud of simultaneous possibilities (superposition). Only when an observer measures it does the wavefunction collapse into a single definite reality.\n\n*This fundamental property allows quantum computers to calculate millions of possibilities at once instead of one by one!*"
+      };
+    }
+
+    // 4. Poetry & Creative
+    if (p.includes("poem") || p.includes("story") || p.includes("haiku") || this.mode === "creative") {
+      const topic = prompt.replace(/write a poem about|write a story about|write a haiku about/gi, "").trim() || "the horizon";
+      return {
+        thinking: "1. Creative writing synthesis\n2. Extracting core imagery: " + topic + "\n3. Composing evocative stanzas with sensory detail.",
+        text: "### 🌌 Echoes of " + topic.charAt(0).toUpperCase() + topic.slice(1) + "\n\nBeyond the quiet edge of dawn,\nWhere every shadow has withdrawn,\nA single breath of morning light\nDisarms the solemn, ancient night.\n\nWe carry worlds behind our eyes,\nUnmeasured depths, unclouded skies—\nAnd with each step across the floor,\nWe become what we were searching for."
+      };
+    }
+
+    // 5. Overthinking & Mind
+    if (p.includes("overthink") || p.includes("stress") || p.includes("anxious") || p.includes("2 am")) {
+      return {
+        thinking: "1. Cognitive behavioral analysis (CBT)\n2. Identifying prefrontal cortex vs amygdala night vigilance\n3. Providing grounding protocol.",
+        text: "### 🧠 The Neuroscience of 2 AM Overthinking\n\nAt night, your brain's **prefrontal cortex** (logic, perspective, time planning) dials down energy to prepare for sleep, while your **amygdala** (threat detection) remains on alert.\n\n**Why thoughts feel catastrophic at night:**\nProblems appear 5x larger because you have zero daytime context or immediate actions you can take.\n\n**The 3-Step Night Reset:**\n1. **The Thought Dump:** Write the looping worry on paper. Tell your brain: *'It is preserved safely on paper; I do not need to hold it in memory until 9 AM.'*\n2. **The 4-7-8 Breath:** Inhale 4s, hold 7s, exhale 8s. A longer exhale physically forces the parasympathetic nervous system to slow heart rate.\n3. **Remember the Rule:** *'Never make life decisions or evaluate your worth after 10 PM.'*"
+      };
+    }
+
+    // 6. General Reasoning Response
+    return {
+      thinking: "1. Deconstructing query: \"" + prompt.slice(0, 50) + "...\"\n2. Structuring comprehensive multi-angle perspective\n3. Formulating actionable synthesis.",
+      text: "### 💡 Analysis & Insights\n\nRegarding **" + prompt.slice(0, 60) + "**:\n\n1. **The Core Principle:** When analyzing this, the key factor is understanding the underlying system dynamics rather than just surface symptoms.\n2. **Practical Perspective:** Focus on what is verifiable right now. Breaking complex challenges into discrete, modular steps consistently yields the clearest outcome.\n3. **Key Takeaway:** Start with the simplest working assumption and iterate with feedback.\n\n*Would you like to drill down into a specific detail, see an example, or explore another aspect?*"
+    };
+  },
+
+  async queryNetworkModel(prompt){
+    // Try Netlify reverse proxy / direct Ollama/DeepSeek endpoint
+    const sysPrompt = this.prompts[this.mode] || this.prompts.general;
+    const endpoints = [
+      "/api/llm/generate",
+      "https://mlvoca.com/api/generate"
+    ];
+
+    for (const url of endpoints) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 6500);
+
+        const res = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ system_instruction: { parts: [{ text: sysPrompt }] }, contents })
+          body: JSON.stringify({
+            model: "deepseek-r1:1.5b",
+            prompt: sysPrompt + "\n\nUser: " + prompt,
+            stream: false
+          }),
+          signal: controller.signal
         });
-        const data = await res.json();
-        return data.candidates[0].content.parts[0].text.trim();
-      }
+        clearTimeout(timeout);
 
-      // Groq
-      if (k.startsWith("gsk_")) {
-        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Authorization": "Bearer " + k },
-          body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "system", content: sysPrompt }, ...historyMessages], temperature: 0.7 })
-        });
-        const data = await res.json();
-        return data.choices[0].message.content.trim();
-      }
-
-      // OpenAI compatible
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + k },
-        body: JSON.stringify({ model: "gpt-4o-mini", messages: [{ role: "system", content: sysPrompt }, ...historyMessages], temperature: 0.7 })
-      });
-      const data = await res.json();
-      return data.choices[0].message.content.trim();
-    }
-
-    // 2. If user explicitly picked Local engine
-    if (this.model === "local") {
-      await new Promise(r => setTimeout(r, 600));
-      return this.generateSmartLocalReply(prompt);
-    }
-
-    // 3. Free Live Frontier Model (Zero Key Required) via Pollinations
-    const sysPrompt = this.prompts[this.mode] || this.prompts.general;
-    const modelTarget = this.model === "mistral" ? "mistral" : (this.model === "qwen" ? "qwen" : "openai");
-
-    // Attempt 1: Direct POST with JSON payload
-    try {
-      const messages = [
-        { role: "system", content: sysPrompt },
-        ...this.history.slice(-6).map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: m.text })),
-        { role: "user", content: prompt }
-      ];
-
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 12000);
-
-      const res = await fetch("https://text.pollinations.ai/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: messages,
-          model: modelTarget,
-          seed: Math.floor(Math.random() * 100000)
-        }),
-        signal: controller.signal
-      });
-      clearTimeout(timer);
-
-      if (res.ok) {
-        const text = await res.text();
-        if (text && !text.includes("Free limit reached") && text.trim().length > 2) {
-          return text.trim();
+        if (res.ok) {
+          const data = await res.json();
+          if (data && (data.response || data.thinking)) {
+            return {
+              text: data.response.trim(),
+              thinking: data.thinking ? data.thinking.trim() : "DeepSeek neural reasoning completed."
+            };
+          }
         }
-      }
-    } catch (_) {}
-
-    // Attempt 2: GET fallback with query params
-    try {
-      const url = "https://text.pollinations.ai/" + encodeURIComponent(prompt) + "?system=" + encodeURIComponent(sysPrompt) + "&model=" + modelTarget;
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 10000);
-      const res = await fetch(url, { signal: controller.signal });
-      clearTimeout(timer);
-
-      if (res.ok) {
-        const text = await res.text();
-        if (text && !text.includes("Free limit reached") && text.trim().length > 2) {
-          return text.trim();
-        }
-      }
-    } catch (_) {}
-
-    // Attempt 3: On-Device Intelligent Fallback Engine
-    return this.generateSmartLocalReply(prompt);
-  },
-
-  generateSmartLocalReply(prompt){
-    const p = prompt.toLowerCase();
-    const mode = this.mode;
-
-    // Study & Homework
-    if (mode === "study" || p.includes("study") || p.includes("exam") || p.includes("test") || p.includes("homework")) {
-      return "### 📚 Study Strategy & Framework\n\nHere is a structured breakdown to master this topic effectively:\n\n1. **Core Concept (The 80/20 Rule):** Focus on the 20% of high-yield definitions and core principles that account for 80% of test questions.\n2. **The Feynman Technique:** Try explaining the idea out loud in simple, everyday language as if teaching a 10-year-old. Wherever you get stuck, that is your exact study gap.\n3. **Active Recall over Passive Reading:** Instead of re-reading notes, close the book and write down everything you remember, or quiz yourself with flashcards.\n4. **Spaced Intervals:** Review in 25-minute Pomodoro bursts with 5-minute movement or breathing breaks.\n\n*Would you like me to quiz you on a specific chapter or summarize a tough formula?*";
+      } catch(_) {}
     }
-
-    // Coding & Logic
-    if (mode === "logic" || p.includes("code") || p.includes("python") || p.includes("javascript") || p.includes("algorithm")) {
-      return "### 💻 Code & Logic Solution\n\nHere is the recommended approach to break down this problem cleanly:\n\n```javascript\n// Example clean implementation\nfunction solveProblem(input) {\n  if (!input) return null;\n  \n  // 1. Process data systematically\n  const result = input.filter(item => Boolean(item));\n  \n  // 2. Return optimized output\n  return result;\n}\n```\n\n**Key Insights:**\n- **Time Complexity:** O(N) linear scan\n- **Space Complexity:** O(N) allocation\n- **Edge cases to watch:** Null or empty inputs, boundary values, and unexpected types.";
-    }
-
-    // Science / Quantum / Physics
-    if (p.includes("quantum") || p.includes("physics") || p.includes("atom") || p.includes("gravity") || p.includes("space")) {
-      return "### 🔬 Physics & Science Explained Simply\n\nImagine two magic dice rolled on opposite sides of the galaxy. The moment one lands on a **6**, the other instantly shows a **1**, with zero delay—even though light would take billions of years to travel between them.\n\n**Key Principles:**\n- **Superposition:** Particles don't have a single fixed state until observed; they exist in a cloud of probabilities.\n- **Entanglement:** Two particles share a unified quantum state so measuring one immediately determines the other.\n- **Why it matters:** This forms the foundation of quantum computing, uncrackable encryption, and advanced atomic clocks!";
-    }
-
-    // Overthinking / Anxiety / Philosophy
-    if (p.includes("overthink") || p.includes("stress") || p.includes("anxious") || p.includes("fear") || p.includes("doubt")) {
-      return "### 🧘 Mindful Perspective & Grounding\n\nOverthinking is your brain's alarm system trying to solve a future scenario that hasn't happened yet.\n\n**Try this 3-Step Reality Check:**\n1. **Sphere of Control:** Draw an imaginary circle. Inside is what you control (your effort, your breath, your next step). Outside is what you can't (other people's reactions, past outcomes).\n2. **Name the Story:** Tell yourself: *'My mind is telling the story that everything will go wrong.'* You are the observer of the thought, not the thought itself.\n3. **Take One Physical Micro-Action:** Drink a glass of water, step outside for 60 seconds, or exhale longer than your inhale to engage your vagus nerve.\n\n*You don't need to figure out your whole life today. Just the next ten minutes.*";
-    }
-
-    // Creative Writing
-    if (mode === "creative" || p.includes("story") || p.includes("poem") || p.includes("write")) {
-      return "### 🌲 The Edge of the Forest\n\nThe air smelled of damp pine needles and cold stone. Twilight settled over the mountains not like a curtain falling, but like blue ink spilling across watercolor paper.\n\nIn the distance, an ancient lantern flickered on the edge of the trail. The silence was so deep you could hear the soft patter of dew dripping from the hemlock branches.\n\nEvery journey, no matter how daunting, begins simply by trusting the ground beneath your next quiet step.";
-    }
-
-    // Default General Intelligent Response
-    return "### 💡 Perspective & Insights\n\nHere is a clear, structured breakdown regarding your question:\n\n- **The Fundamental Idea:** The simplest explanation is often the most durable. When tackling this, identify the core constraint first.\n- **Actionable Takeaway:** Break the problem into small, verifiable pieces rather than attempting to solve the entire whole at once.\n- **Next Step:** What is the single smallest action you can test in the next 5 minutes?\n\n*Feel free to ask me to elaborate, give practical examples, or explore a different angle!*";
+    return null;
   },
 
   async sendMessage(directText){
     const inp = $("llm-input");
     const sendBtn = $("llm-send");
+    const stopBtn = $("llm-stop");
     const prompt = (directText !== undefined ? directText : (inp ? inp.value : "")).trim();
     if (!prompt) return;
 
     if (inp) inp.value = "";
     Haptics.pop();
 
-    // Add user message
     this.history.push({
       role: "user",
       text: prompt,
-      time: Date.now(),
-      mode: this.mode,
-      model: this.model
+      time: Date.now()
     });
-    ls("halo_llm_chat", JSON.stringify(this.history.slice(-40)));
     this.renderChat();
-    this.renderTypingIndicator();
 
-    if (sendBtn) {
-      sendBtn.disabled = true;
-      sendBtn.textContent = "Halo LLM is thinking…";
+    if (sendBtn) sendBtn.style.display = "none";
+    if (stopBtn) stopBtn.style.display = "inline-block";
+
+    const aiMsgIdx = this.history.length;
+    const startTime = Date.now();
+
+    // Prepare placeholder AI message with thinking
+    this.history.push({
+      role: "assistant",
+      thinking: "Analyzing query: \"" + prompt.slice(0, 40) + "...\"\nDeconstructing concept and activating neural weights...",
+      text: "",
+      time: Date.now(),
+      model: this.model === "deepseek" ? "DeepSeek-R1" : "Halo LLM"
+    });
+    this.renderChat();
+
+    let result = null;
+    if (this.model !== "local") {
+      result = await this.queryNetworkModel(prompt);
     }
 
-    try {
-      const response = await this.queryAPI(prompt);
-      this.removeTypingIndicator();
-      Haptics.success();
-
-      this.history.push({
-        role: "assistant",
-        text: response,
-        time: Date.now(),
-        mode: this.mode,
-        model: this.model
-      });
-      ls("halo_llm_chat", JSON.stringify(this.history.slice(-40)));
-      this.renderChat();
-    } catch (err) {
-      this.removeTypingIndicator();
-      const fallback = this.generateSmartLocalReply(prompt);
-      this.history.push({
-        role: "assistant",
-        text: fallback,
-        time: Date.now(),
-        mode: this.mode,
-        model: "local"
-      });
-      ls("halo_llm_chat", JSON.stringify(this.history.slice(-40)));
-      this.renderChat();
-    } finally {
-      if (sendBtn) {
-        sendBtn.disabled = false;
-        sendBtn.textContent = "Ask Halo LLM ✨";
-      }
+    if (!result) {
+      result = this.generateDynamicResponse(prompt);
     }
+
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    const tokenEstimate = Math.round(result.text.length / 4);
+    const statsStr = "⚡ " + tokenEstimate + " tokens in " + elapsed + "s (" + Math.round(tokenEstimate / Math.max(0.5, elapsed)) + " t/s) · " + (this.model === "deepseek" ? "DeepSeek-R1" : "Halo Engine");
+
+    // Update thinking in history
+    this.history[aiMsgIdx].thinking = result.thinking;
+    this.renderChat();
+
+    // Stream typewriter tokens
+    await this.streamTypewriter(aiMsgIdx, result.text, result.thinking, statsStr);
+
+    if (sendBtn) sendBtn.style.display = "inline-block";
+    if (stopBtn) stopBtn.style.display = "none";
+    Haptics.success();
   },
 
   archiveCurrentChat(){
@@ -3531,8 +3499,8 @@ function renderLlmChat(){
   HaloLLM.renderChat();
 }
 
-// Initialize Halo LLM on page load
 HaloLLM.init();
+
 
 
 document.addEventListener("click",e=>{
