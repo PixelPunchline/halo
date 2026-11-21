@@ -65,6 +65,17 @@ Adolescence and academic pressure often bring silent struggles: sensory overwhel
 - An emotionally attuned, warm conversational companion trained in non-judgmental reflective inquiry.
 - Capable of guiding through burnout, social comparison, imposter syndrome, and study stress without clinical jargon.
 
+### 6. 🧠 Halo LLM Studio (Free Frontier Generative AI)
+- **Zero-Key Live Intelligence:** Dedicated open-ended LLM studio operating live out of the box with zero sign-up, zero tokens, and no API key required.
+- **5 Specialized Personas:**
+  - 🌟 **General Intelligence:** Versatile problem solving, concept breakdowns, and brainstorming.
+  - 📚 **Study & Homework Mentor:** Step-by-step academic explanations using the Feynman technique and active recall.
+  - 🎨 **Creative Writing Muse:** Poetry, vivid narratives, and sensory creative sparks.
+  - 🧘 **Mind & Philosophy Guide:** Grounded in stoicism, CBT cognitive reframing, and perspective.
+  - 💻 **Code & Logic Assistant:** Clean, bug-free implementations and algorithmic analysis.
+- **Multi-Model Architecture:** Instant toggle between **OpenAI**, **Mistral**, **Qwen**, or a 100% **On-Device Local Fallback** engine.
+- **Rich Markdown & Session Archive:** Syntax-highlighted code blocks, one-click response copying, chat history drawer, and optional custom API key support.
+
 ---
 
 ## 📂 Project Architecture
