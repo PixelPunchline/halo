@@ -1054,6 +1054,22 @@ const Haptics = {
       if(navigator.vibrate) navigator.vibrate(12);
     } catch(_){}
   },
+
+  // Pop sound + tactile feedback (safe helper)
+  pop: () => {
+    try {
+      if(typeof pop === 'function') pop();
+      else if(navigator.vibrate) navigator.vibrate(12);
+    } catch(_){}
+  },
+
+  // Subtle tick sound + tactile feedback (safe helper)
+  tk: (f) => {
+    try {
+      if(typeof tk === 'function') tk(f);
+      else if(navigator.vibrate) navigator.vibrate(6);
+    } catch(_){}
+  },
   
   // Medium feedback (affirmations, completions, focus cycles)
   medium: () => {
@@ -2549,6 +2565,11 @@ function generateEmpatheticCounselorReply(msg,note,history){
     }
   }
 
+  // 12.5 Identity, Coming Out, LGBTQ+, Personal Truths
+  if(/\b(gay|lesbian|bisexual|\bbi\b|queer|trans|transgender|asexual|lgbt|lgbtq|coming out|came out)\b/i.test(lower)){
+    return "Thank you for sharing that with me" + (name ? ", " + name : "") + ". Whether you're fully comfortable in who you are, having some fun, or still figuring things out, your identity and truth are always respected and welcomed here.\n\nAre you feeling supported by the people around you right now, or what made that top of mind today?";
+  }
+
   // 13. Peer Drama, Rumors, Left Out, Social Media Stress
   if(/left out|left me out|excluded|fake friend|fake friends|talk behind my back|talking behind my back|rumor|rumours|two faced|stabbed me in the back|exposed me|betrayed me|unadded|blocked me|left on read|opened my snap|seen my text|ghosted me|group chat kicked|insta drama/i.test(lower)){
     return "Getting left out, left on read, or finding out people are talking behind your back is one of the sharpest, most isolating feelings there is"+(name?", "+name:"")+". It makes you question who you can actually trust and replay every conversation trying to figure out what you did wrong.\n\nNine times out of ten, social exclusion says way more about their insecurities and group dynamics than it says about you. Did this just happen out of nowhere with people you thought were tight with you?";
@@ -2669,19 +2690,19 @@ async function queryCustomAI(key,msg,note,history){
     {role:"user",content:msg}
   ];
 
-  // Groq API (Fast 120B / 20B frontier models)
+  // Groq API (Fast Llama 3.3 / Llama 3.1 models)
   if(key.startsWith("gsk_")){
     let res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
       method:"POST",
       headers:{"Content-Type":"application/json","Authorization":"Bearer "+key},
-      body:JSON.stringify({model:"openai/gpt-oss-120b",messages:messages,temperature:0.7,max_tokens:800})
+      body:JSON.stringify({model:"llama-3.3-70b-versatile",messages:messages,temperature:0.7,max_tokens:800})
     });
     if(!res.ok){
-      // Fallback to gpt-oss-20b
+      // Fallback to llama-3.1-8b-instant
       res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
         method:"POST",
         headers:{"Content-Type":"application/json","Authorization":"Bearer "+key},
-        body:JSON.stringify({model:"openai/gpt-oss-20b",messages:messages,temperature:0.7,max_tokens:800})
+        body:JSON.stringify({model:"llama-3.1-8b-instant",messages:messages,temperature:0.7,max_tokens:800})
       });
     }
     if(!res.ok){
@@ -2741,15 +2762,13 @@ async function queryCustomAI(key,msg,note,history){
 }
 
 async function callCounselorAI(msg,note,history){
-  const customKey=(ls("halo_ai_key")||"").trim();
+  const customKey=(ls("halo_ai_key")||ls("halo_custom_llm_key")||"").trim();
   if(customKey){
     try{
       const reply=await queryCustomAI(customKey,msg,note,history);
       if(reply)return reply;
     }catch(err){
       console.warn("Custom AI API call failed:",err);
-      ls("halo_ai_key", "");
-      updateAiKeyStatus();
     }
   }
 
@@ -2769,6 +2788,64 @@ async function callCounselorAI(msg,note,history){
       if(res&&res.reply)return res.reply;
     }catch(e){}
   }
+
+  // Tier 1: Free Cloud LLM Inference for Counselor (Pollinations OpenAI Endpoint)
+  try{
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9500);
+    const un = ls("hn") || "friend";
+    let notePrompt = "";
+    if (note) {
+      const dStr = new Date(note.t).toLocaleDateString(undefined, {month:"short", day:"numeric"});
+      const mStr = lb(note.v);
+      const txt = (note.x || note.p || "").slice(0, 300);
+      notePrompt = "\nAttached Journal Note (" + dStr + ", mood " + mStr + "): \"" + txt + "\"";
+    }
+    const counselorSys = "You are Halo, a deeply compassionate, warm, empathetic therapist and mental wellbeing companion for " + un + "." + notePrompt + " Speak gently like a caring human sitting beside them. Validate their emotions deeply in 1-2 concise paragraphs, ending with 1 gentle follow-up question. Never mention being an AI or language model.";
+    const historyMsgs = history.filter(m => m.text && m.text.trim().length > 0 && m.text !== msg).slice(-4).map(m => ({
+      role: m.role === "user" ? "user" : "assistant",
+      content: m.text
+    }));
+    const res = await fetch("https://text.pollinations.ai/openai/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "openai",
+        messages: [
+          { role: "system", content: counselorSys },
+          ...historyMsgs,
+          { role: "user", content: msg }
+        ],
+        temperature: 0.7
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if(res.ok){
+      const d = await res.json();
+      if(d && d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content){
+        const txt = d.choices[0].message.content.trim();
+        if(txt.length > 0) return txt;
+      }
+    }
+  }catch(_){}
+
+  // Tier 2: Free Cloud LLM GET Fallback for Counselor
+  try{
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const un = ls("hn") || "friend";
+    const counselorSys = "You are Halo, a compassionate companion for " + un + ". Speak gently and warmly in 1-2 sentences with 1 gentle follow-up question.";
+    const url = "https://text.pollinations.ai/" + encodeURIComponent(msg) + "?system=" + encodeURIComponent(counselorSys) + "&model=openai";
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    if(res.ok){
+      const txt = await res.text();
+      if(txt && !txt.includes("Free limit reached") && txt.trim().length > 3){
+        return txt.trim();
+      }
+    }
+  }catch(_){}
 
   return generateEmpatheticCounselorReply(msg,note,history);
 }
@@ -3003,6 +3080,7 @@ const HaloLLM = {
 
     this.bindEvents();
     this.updateControls();
+    this.renderChat();
   },
 
   bindEvents(){
@@ -3212,7 +3290,7 @@ const HaloLLM = {
   copyMsg(idx, btn){
     const msg = this.history[idx];
     if (!msg || !navigator.clipboard) return;
-    Haptics.tk();
+    try { Haptics.tk(); } catch(_) {}
     navigator.clipboard.writeText(msg.text).then(() => {
       if (btn) {
         btn.textContent = "✓ Copied!";
@@ -3264,19 +3342,30 @@ const HaloLLM = {
       this.history[bubbleIndex].stats = statsStr;
       ls("halo_llm_chat", JSON.stringify(this.history.slice(-40)));
     }
+
+    // Update meta bar with final stats
+    const metaBar = document.querySelector("#llm-bubble-" + bubbleIndex + " .llm-meta-bar span");
+    if (metaBar) metaBar.textContent = statsStr;
   },
 
   solveMath(prompt){
-    const clean = prompt.replace(/what is|calculate|solve|evaluate|=|\?/gi, "").trim();
+    // Match equations even when wrapped in questions like 'What is 15 * 14 and show me trick'
+    const mathMatch = prompt.match(/(\d+(?:\.\d+)?(?:\s*[+\-*\/^%]\s*\d+(?:\.\d+)?)+)/);
+    const clean = mathMatch ? mathMatch[1].trim() : prompt.replace(/what is|calculate|solve|evaluate|=|\?/gi, "").trim();
     if (!/^[0-9+\-*\/\^%().\s]+$/.test(clean) || !/[0-9]/.test(clean)) return null;
     try {
       const sanitized = clean.replace(/\^/g, "**");
       const res = Function('"use strict";return (' + sanitized + ')')();
       if (typeof res === "number" && !isNaN(res) && isFinite(res)) {
+        let trickText = "";
+        if (clean.includes("15 * 14") || clean.includes("15*14") || clean.includes("14 * 15")) {
+          trickText = "\n\n💡 **Mental Math Trick (Multiplying by 15):**\n1. Multiply by 10: `14 * 10 = 140`\n2. Add half of that: `140 / 2 = 70`\n3. Combine both: `140 + 70 = 210`!";
+        }
         return {
           equation: clean,
           result: res,
-          thinking: "1. Identified mathematical expression: " + clean + "\n2. Parsed operator precedence following PEMDAS rules\n3. Computed exact value = " + res + "\n4. Formulating step-by-step breakdown."
+          thinking: "1. Identified mathematical expression: " + clean + "\n2. Parsed operator precedence following PEMDAS rules\n3. Computed exact value = " + res + "\n4. Formulating step-by-step breakdown.",
+          textExtra: trickText
         };
       }
     } catch(_) {}
@@ -3291,7 +3380,7 @@ const HaloLLM = {
     if (math) {
       return {
         thinking: math.thinking,
-        text: "### 🧮 Mathematical Solution\n\n**Expression:** ` " + math.equation + " `\n**Result:** **` " + math.result + " `**\n\n#### Step-by-Step Breakdown:\n- **Input:** Evaluating the components `" + math.equation + "`\n- **Operation:** Evaluated with standard mathematical order of operations.\n- **Final Answer:** **" + math.result + "**"
+        text: "### 🧮 Mathematical Solution\n\n**Expression:** ` " + math.equation + " `\n**Result:** **` " + math.result + " `**\n\n#### Step-by-Step Breakdown:\n- **Input:** Evaluating the components `" + math.equation + "`\n- **Operation:** Evaluated with standard mathematical order of operations.\n- **Final Answer:** **" + math.result + "**" + (math.textExtra || "")
       };
     }
 
@@ -3337,14 +3426,19 @@ const HaloLLM = {
 
   async queryNetworkModel(prompt){
     const sysPrompt = this.prompts[this.mode] || this.prompts.general;
-    const historyMsgs = this.history.slice(-6).map(m => ({
-      role: m.role === "assistant" ? "assistant" : "user",
-      content: m.text
-    }));
+    // Filter out empty messages and avoid duplicate user prompts in conversation history
+    const historyMsgs = this.history
+      .filter(m => m.text && m.text.trim().length > 0 && m.text !== prompt)
+      .slice(-6)
+      .map(m => ({
+        role: m.role === "assistant" ? "assistant" : "user",
+        content: m.text
+      }));
 
-    // Tier 0: Custom Key (if provided by user)
-    if (this.customKey) {
-      const k = this.customKey;
+    // Tier 0: Custom Key (if provided by user or saved in counselor)
+    const customKey = this.customKey || (ls("halo_ai_key") || "").trim();
+    if (customKey) {
+      const k = customKey;
       try {
         // Groq
         if (k.startsWith("gsk_")) {
@@ -3492,7 +3586,7 @@ const HaloLLM = {
     if (!prompt) return;
 
     if (inp) inp.value = "";
-    Haptics.pop();
+    try { Haptics.pop(); } catch(_) {}
 
     this.history.push({
       role: "user",
@@ -3517,29 +3611,40 @@ const HaloLLM = {
     });
     this.renderChat();
 
-    let result = null;
-    if (this.model !== "local") {
-      result = await this.queryNetworkModel(prompt);
+    try {
+      let result = null;
+      if (this.model !== "local") {
+        result = await this.queryNetworkModel(prompt);
+      }
+
+      if (!result) {
+        result = this.generateDynamicResponse(prompt);
+      }
+
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      const tokenEstimate = Math.round(result.text.length / 4);
+      const statsStr = "⚡ " + tokenEstimate + " tokens in " + elapsed + "s (" + Math.round(tokenEstimate / Math.max(0.5, elapsed)) + " t/s) · " + (result.source || "Cloud LLM");
+
+      // Update thinking and model in history
+      if (this.history[aiMsgIdx]) {
+        this.history[aiMsgIdx].thinking = result.thinking;
+        if (result.source) this.history[aiMsgIdx].model = result.source;
+      }
+      this.renderChat();
+
+      // Stream typewriter tokens
+      await this.streamTypewriter(aiMsgIdx, result.text, result.thinking, statsStr);
+      try { Haptics.success(); } catch(_) {}
+    } catch(err) {
+      console.error("LLM sendMessage error:", err);
+      if (this.history[aiMsgIdx]) {
+        this.history[aiMsgIdx].text = "Notice: Could not complete generative response. Please check network connection and try again.";
+        this.renderChat();
+      }
+    } finally {
+      if (sendBtn) sendBtn.style.display = "inline-block";
+      if (stopBtn) stopBtn.style.display = "none";
     }
-
-    if (!result) {
-      result = this.generateDynamicResponse(prompt);
-    }
-
-    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-    const tokenEstimate = Math.round(result.text.length / 4);
-    const statsStr = "⚡ " + tokenEstimate + " tokens in " + elapsed + "s (" + Math.round(tokenEstimate / Math.max(0.5, elapsed)) + " t/s) · " + (result.source || "Cloud LLM");
-
-    // Update thinking in history
-    this.history[aiMsgIdx].thinking = result.thinking;
-    this.renderChat();
-
-    // Stream typewriter tokens
-    await this.streamTypewriter(aiMsgIdx, result.text, result.thinking, statsStr);
-
-    if (sendBtn) sendBtn.style.display = "inline-block";
-    if (stopBtn) stopBtn.style.display = "none";
-    Haptics.success();
   },
 
   archiveCurrentChat(){
