@@ -1,9 +1,8 @@
 [build]
-  publish = "www"
+  command = "node scripts/build-web.js"
+  publish = "."
 
 [[redirects]]
-  from = "/api/llm/*"
-  to = "https://mlvoca.com/api/:splat"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = true
-  headers = {Access-Control-Allow-Origin = "*", Access-Control-Allow-Headers = "*"}
