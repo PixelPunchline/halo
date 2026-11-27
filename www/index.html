@@ -1005,7 +1005,211 @@ const H=new Date().getHours();
 function greet(nm){const g=H<12?"Good morning":H<18?"Good afternoon":"Good evening",e=document.createElement("em");e.textContent="How are you, really?";$("gr").textContent="";$("gr").append(g+(nm?", "+nm:"")+".",document.createElement("br"),e)}greet(ls("hn")||"");
 (function(){const a=$("cn"),i=$("cni"),done=()=>{const v=i.value.trim().slice(0,24);ls("hn",v);greet(v);i.style.display="none";if($("cnc"))$("cnc").style.display="none";a.style.display="inline"};const cnc=$("cnc");if(cnc)cnc.onclick=()=>{i.style.display="none";cnc.style.display="none";a.style.display="inline";i.blur()};a.onclick=()=>{i.value=ls("hn")||"";a.style.display="none";i.style.display="inline-block";if(cnc)cnc.style.display="inline-block";i.focus()};i.onkeydown=e=>{if(e.key==="Enter")done()};i.onblur=()=>{if(i.style.display!=="none")done()}})();
 let sam=null;(async()=>{try{sam=await claude.use("sample")}catch(e){}})();
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
+
+/* === HaloDB: On-Device IndexedDB Storage & Knowledge Base === */
+const HaloDB = {
+  dbName: "HaloDB",
+  version: 1,
+  db: null,
+  isReady: false,
+  readyPromise: null,
+
+  init() {
+    if (this.readyPromise) return this.readyPromise;
+    this.readyPromise = new Promise((resolve) => {
+      if (typeof window === "undefined" || !window.indexedDB) {
+        this.isReady = true;
+        resolve(null);
+        return;
+      }
+      try {
+        const req = indexedDB.open(this.dbName, this.version);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains("journal")) {
+            db.createObjectStore("journal", { keyPath: "t" });
+          }
+          if (!db.objectStoreNames.contains("chats")) {
+            db.createObjectStore("chats", { keyPath: "id" });
+          }
+          if (!db.objectStoreNames.contains("knowledge")) {
+            const ks = db.createObjectStore("knowledge", { keyPath: "id" });
+            ks.createIndex("category", "category", { unique: false });
+          }
+          if (!db.objectStoreNames.contains("settings")) {
+            db.createObjectStore("settings", { keyPath: "key" });
+          }
+        };
+        req.onsuccess = (e) => {
+          this.db = e.target.result;
+          this.isReady = true;
+          this.migrateFromLocalStorage();
+          this.seedKnowledgeBase();
+          resolve(this.db);
+        };
+        req.onerror = () => {
+          this.isReady = true;
+          resolve(null);
+        };
+      } catch(err) {
+        this.isReady = true;
+        resolve(null);
+      }
+    });
+    return this.readyPromise;
+  },
+
+  async migrateFromLocalStorage() {
+    if (!this.db) return;
+    try {
+      // 1. Migrate Journal
+      const rawJ = localStorage.getItem("hj");
+      if (rawJ) {
+        const entries = JSON.parse(rawJ);
+        if (Array.isArray(entries)) {
+          const tx = this.db.transaction("journal", "readwrite");
+          const store = tx.objectStore("journal");
+          entries.forEach(item => { if (item && item.t) store.put(item); });
+        }
+      }
+
+      // 2. Migrate Chats
+      const chatTx = this.db.transaction("chats", "readwrite");
+      const chatStore = chatTx.objectStore("chats");
+      const cChat = localStorage.getItem("hc_chat");
+      if (cChat) chatStore.put({ id: "counselor_chat", data: JSON.parse(cChat), updatedAt: Date.now() });
+      const cArch = localStorage.getItem("hc_archived_sessions");
+      if (cArch) chatStore.put({ id: "counselor_archives", data: JSON.parse(cArch), updatedAt: Date.now() });
+      const lChat = localStorage.getItem("halo_llm_chat");
+      if (lChat) chatStore.put({ id: "llm_chat", data: JSON.parse(lChat), updatedAt: Date.now() });
+      const lArch = localStorage.getItem("halo_llm_archives");
+      if (lArch) chatStore.put({ id: "llm_archives", data: JSON.parse(lArch), updatedAt: Date.now() });
+
+      // 3. Migrate Settings
+      const setTx = this.db.transaction("settings", "readwrite");
+      const setStore = setTx.objectStore("settings");
+      ["hn", "hs", "hd", "hc_theme", "ha", "hw", "halo_ai_key", "halo_custom_llm_key", "halo_llm_mode", "halo_llm_model"].forEach(k => {
+        const v = localStorage.getItem(k);
+        if (v !== null) setStore.put({ key: k, value: v, updatedAt: Date.now() });
+      });
+    } catch(err) {
+      console.warn("HaloDB migration notice:", err);
+    }
+  },
+
+  seedKnowledgeBase() {
+    if (!this.db) return;
+    try {
+      const tx = this.db.transaction("knowledge", "readwrite");
+      const store = tx.objectStore("knowledge");
+      const articles = [
+        {
+          id: "math_pemdas",
+          category: "mathematics",
+          title: "Order of Operations & Mental Arithmetic",
+          keywords: ["math", "pemdas", "multiplication", "arithmetic", "calculate"],
+          content: "PEMDAS: Parentheses, Exponents, Multiplication & Division, Addition & Subtraction. Mental Math 15x: Multiply by 10 then add half."
+        },
+        {
+          id: "physics_sky_blue",
+          category: "physics",
+          title: "Rayleigh Scattering in Earth Atmosphere",
+          keywords: ["sky", "blue", "light", "scattering", "optics", "physics"],
+          content: "Sunlight contains all wavelengths. Shorter wavelengths (blue light) scatter far more intensely than longer wavelengths off atmospheric gas molecules (Rayleigh Scattering)."
+        },
+        {
+          id: "quantum_superposition",
+          category: "physics",
+          title: "Quantum Superposition & Wavefunctions",
+          keywords: ["quantum", "superposition", "entanglement", "physics", "wavefunction"],
+          content: "Subatomic particles exist in probabilistic superposition until wave function collapse upon measurement (spinning coin analogy)."
+        },
+        {
+          id: "neuroscience_overthinking",
+          category: "psychology",
+          title: "Neuroscience of 2 AM Overthinking & Sleep Grounding",
+          keywords: ["overthink", "anxiety", "insomnia", "stress", "sleep", "cbt"],
+          content: "Prefrontal cortex activity decreases at night while amygdala stays vigilant. Protocol: Write thought dump on paper, practice 4-7-8 breathing, delay decisions until morning."
+        },
+        {
+          id: "clinical_grounding",
+          category: "counselor",
+          title: "Empathetic Grounding & Crisis Protocols",
+          keywords: ["crisis", "help", "breathe", "grounding", "identity", "lgbtq"],
+          content: "Provides immediate non-judgmental validation, de-escalation, 4-7-8 breathing prompts, and suicide/crisis hotline contact references."
+        }
+      ];
+      articles.forEach(art => store.put(art));
+    } catch(_) {}
+  },
+
+  saveKey(k, v) {
+    if (!this.db) return;
+    try {
+      if (k === "hj") {
+        const tx = this.db.transaction("journal", "readwrite");
+        const store = tx.objectStore("journal");
+        const entries = JSON.parse(v || "[]");
+        entries.forEach(item => { if (item && item.t) store.put(item); });
+      } else if (["hc_chat", "hc_archived_sessions", "halo_llm_chat", "halo_llm_archives"].includes(k)) {
+        const tx = this.db.transaction("chats", "readwrite");
+        tx.objectStore("chats").put({ id: k, data: JSON.parse(v || "[]"), updatedAt: Date.now() });
+      } else {
+        const tx = this.db.transaction("settings", "readwrite");
+        tx.objectStore("settings").put({ key: k, value: v, updatedAt: Date.now() });
+      }
+    } catch(_) {}
+  },
+
+  async searchKnowledge(query) {
+    if (!this.db) return [];
+    return new Promise(res => {
+      try {
+        const tx = this.db.transaction("knowledge", "readonly");
+        const req = tx.objectStore("knowledge").getAll();
+        req.onsuccess = () => {
+          const q = (query || "").toLowerCase();
+          const items = (req.result || []).filter(item => {
+            return (item.title && item.title.toLowerCase().includes(q)) ||
+                   (item.content && item.content.toLowerCase().includes(q)) ||
+                   (item.keywords && item.keywords.some(k => q.includes(k)));
+          });
+          res(items);
+        };
+        req.onerror = () => res([]);
+      } catch(_) { res([]); }
+    });
+  },
+
+  async exportDatabase() {
+    if (!this.db) return {};
+    const stores = ["journal", "chats", "knowledge", "settings"];
+    const backup = { exportedAt: new Date().toISOString(), data: {} };
+    for (const s of stores) {
+      backup.data[s] = await new Promise(r => {
+        try {
+          const tx = this.db.transaction(s, "readonly");
+          const req = tx.objectStore(s).getAll();
+          req.onsuccess = () => r(req.result || []);
+          req.onerror = () => r([]);
+        } catch(_) { r([]); }
+      });
+    }
+    return backup;
+  }
+};
+HaloDB.init();
+
+function ls(k, v){
+  try {
+    if (v === undefined) return localStorage.getItem(k);
+    localStorage.setItem(k, v);
+    if (typeof HaloDB !== "undefined" && HaloDB.saveKey) {
+      HaloDB.saveKey(k, v);
+    }
+  } catch(e) {}
+  return null;
+}
 const d0=ls("hd"),d1=new Date().toDateString();if(d0!==d1){const y=new Date(Date.now()-864e5).toDateString();ls("hs",String(d0===y?(+ls("hs")||0)+1:1));ls("hd",d1)}
 $("pill").textContent="Day "+(+ls("hs")||1);
 
@@ -3372,8 +3576,23 @@ const HaloLLM = {
     return null;
   },
 
-  generateDynamicResponse(prompt){
+  async generateDynamicResponse(prompt){
     const p = prompt.toLowerCase();
+
+    // 0. On-Device Knowledge Base Search (HaloDB)
+    if (typeof HaloDB !== "undefined" && HaloDB.db) {
+      try {
+        const docs = await HaloDB.searchKnowledge(prompt);
+        if (docs && docs.length > 0) {
+          const top = docs[0];
+          return {
+            thinking: "1. Queried on-device HaloDB knowledge store for: \"" + prompt.slice(0, 40) + "\"\n2. Retrieved verified knowledge entry [" + top.id + "] (" + top.category + ")\n3. Synthesizing contextual explanation.",
+            text: "### 📚 " + top.title + "\n\n" + top.content + "\n\n*Source: On-Device HaloDB Knowledge Base (" + top.category + ")*",
+            source: "HaloDB Knowledge Store"
+          };
+        }
+      } catch(_) {}
+    }
 
     // 1. Math solver
     const math = this.solveMath(prompt);
@@ -3618,7 +3837,7 @@ const HaloLLM = {
       }
 
       if (!result) {
-        result = this.generateDynamicResponse(prompt);
+        result = await this.generateDynamicResponse(prompt);
       }
 
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
