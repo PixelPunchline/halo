@@ -904,6 +904,7 @@ button.ai-chip:active{
         <button class="pill on" data-model="deepseek" style="padding:3px 8px;font-size:.72rem">🧠 DeepSeek-R1</button>
         <button class="pill" data-model="llama" style="padding:3px 8px;font-size:.72rem">⚡ Llama 3.3</button>
         <button class="pill" data-model="mistral" style="padding:3px 8px;font-size:.72rem">🌐 Mistral</button>
+        <button class="pill" data-model="ollama" style="padding:3px 8px;font-size:.72rem">🦙 Ollama (Local)</button>
         <button class="pill" data-model="local" style="padding:3px 8px;font-size:.72rem">🛡️ On-Device Local</button>
       </div>
     </div>
@@ -2854,6 +2855,14 @@ function generateEmpatheticCounselorReply(msg,note,history){
     return "Anger is an intense, fiery emotion, and you're completely valid in feeling pissed off right now"+(name?", "+name:"")+". Usually anger is just the surface shield protecting a deeper feeling of hurt or unfairness.\n\nVent it all out to me right here—you don't have to hold it in or be polite. What did they do that crossed the line?";
   }
 
+  // 25.5 Short / Unclear / Typo Input (e.g. "hj", random keys)
+  const cleanWord = raw.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if(cleanWord.length <= 3 && !/^(hi|hey|yo|yes|no|ok|sup|sad|mad|bad|bye)$/i.test(cleanWord)){
+    return name
+      ? "I didn't quite catch that, "+name+". Did you mean to type something else, or what's on your mind?"
+      : "I didn't quite catch that. Did you mean to type something else, or what's on your mind?";
+  }
+
   // 26. Long Input Reflection
   if(raw.length>50){
     const snippet=raw.slice(0,90)+(raw.length>90?"…":"");
@@ -2966,6 +2975,47 @@ async function queryCustomAI(key,msg,note,history){
 }
 
 async function callCounselorAI(msg,note,history){
+  // Tier 0: Local Ollama (qwen3.5:4b at 127.0.0.1:11434)
+  try{
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 6500);
+    const un = ls("hn") || "friend";
+    let notePrompt = "";
+    if (note) {
+      const dStr = new Date(note.t).toLocaleDateString(undefined, {month:"short", day:"numeric"});
+      const mStr = lb(note.v);
+      const txt = (note.x || note.p || "").slice(0, 300);
+      notePrompt = "\nAttached Journal Note (" + dStr + ", mood " + mStr + "): \"" + txt + "\"";
+    }
+    const counselorSys = "You are Halo, a deeply compassionate, warm, empathetic therapist and mental wellbeing companion for " + un + "." + notePrompt + " Speak gently like a caring human sitting beside them. If the user input is brief or unclear, gently ask for clarification. Validate their emotions in 1-2 concise paragraphs, ending with 1 gentle follow-up question. Never mention being an AI or language model.";
+    const historyMsgs = history.filter(m => m.text && m.text.trim().length > 0 && m.text !== msg).slice(-4).map(m => ({
+      role: m.role === "user" ? "user" : "assistant",
+      content: m.text
+    }));
+    const res = await fetch("http://127.0.0.1:11434/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "qwen3.5:4b",
+        messages: [
+          { role: "system", content: counselorSys },
+          ...historyMsgs,
+          { role: "user", content: msg }
+        ],
+        temperature: 0.7,
+        max_tokens: 300
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if(res.ok){
+      const d = await res.json();
+      if(d && d.choices && d.choices[0] && d.choices[0].message){
+        const c = (d.choices[0].message.content || "").trim();
+        if(c.length > 0) return c;
+      }
+    }
+  }catch(_){}
   const customKey=(ls("halo_ai_key")||ls("halo_custom_llm_key")||"").trim();
   if(customKey){
     try{
@@ -3653,6 +3703,41 @@ const HaloLLM = {
         role: m.role === "assistant" ? "assistant" : "user",
         content: m.text
       }));
+
+    // Tier 0: Ollama Local Runner (qwen3.5:4b / qwen3.5:2b at 127.0.0.1:11434)
+    if (this.model === "ollama" || this.model === "local") {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch("http://127.0.0.1:11434/v1/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "qwen3.5:4b",
+            messages: [{ role: "system", content: sysPrompt }, ...historyMsgs, { role: "user", content: prompt }],
+            temperature: 0.7,
+            max_tokens: 500
+          }),
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+        if (res.ok) {
+          const d = await res.json();
+          const msgObj = d.choices && d.choices[0] && d.choices[0].message;
+          if (msgObj) {
+            const txt = (msgObj.content || "").trim();
+            const reasoning = (msgObj.reasoning || "").trim();
+            if (txt.length > 0 || reasoning.length > 0) {
+              return {
+                text: txt || reasoning,
+                thinking: reasoning || "Inference performed locally via Ollama (qwen3.5:4b).",
+                source: "Ollama (qwen3.5:4b)"
+              };
+            }
+          }
+        }
+      } catch(_) {}
+    }
 
     // Tier 0: Custom Key (if provided by user or saved in counselor)
     const customKey = this.customKey || (ls("halo_ai_key") || "").trim();
